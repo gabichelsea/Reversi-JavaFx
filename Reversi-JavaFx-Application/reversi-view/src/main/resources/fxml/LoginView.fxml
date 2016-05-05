@@ -37,7 +37,7 @@
 		<Button fx:id="secondPlayerLoginButton" layoutX="641.0"
 			layoutY="295.0" mnemonicParsing="false" onAction="#secondPlayerLoginButtonAction"
 			text="Bejelentkezés" />
-		<Button layoutX="445.0" layoutY="385.0" mnemonicParsing="false"
-			text="Játék indítása" />
+		<Button fx:id="startGame" layoutX="445.0" layoutY="385.0" mnemonicParsing="false"
+			text="Játék indítása" onAction="#startGameButtonAction" visible="true"/>
 	</children>
 </AnchorPane>

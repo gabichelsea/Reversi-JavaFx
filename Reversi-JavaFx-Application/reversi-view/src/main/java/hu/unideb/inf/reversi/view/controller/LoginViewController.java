@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 
 import hu.unideb.inf.reversi.service.interfaces.PlayerService;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
+import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
 import hu.unideb.inf.reversi.view.utility.TextDisplayUtility;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,6 +50,11 @@ public class LoginViewController {
 	private TextField secondPlayerPasswordTextField;
 
 	@FXML
+	private Button registerNewPlayer;
+	@FXML
+	private Button startGame;
+
+	@FXML
 	protected void firstPlayerLoginButtonAction() throws Exception {
 		String userName = firstPlayerUserNameTextField.getText();
 		if (checkFirstPlayerByName(userName)) {
@@ -69,6 +76,7 @@ public class LoginViewController {
 		} else {
 			firstPlayerLoginLabel.setText(TextDisplayUtility.THIS_USER_IS_ALREADY_LOGGED_IN);
 		}
+		showStartGameButton();
 	}
 
 	@FXML
@@ -93,6 +101,12 @@ public class LoginViewController {
 		} else {
 			secondPlayerLoginLabel.setText(TextDisplayUtility.THIS_USER_IS_ALREADY_LOGGED_IN);
 		}
+		showStartGameButton();
+	}
+
+	@FXML
+	protected void startGameButtonAction(ActionEvent event) {
+		NavigationControllerUtility.loadGameView(event);
 	}
 
 	private Boolean checkFirstPlayerByName(String userName) throws Exception {
@@ -125,5 +139,11 @@ public class LoginViewController {
 		secondPlayerPasswordLabel.setVisible(false);
 		secondPlayerPasswordTextField.setVisible(false);
 		secondPlayerLoginButton.setVisible(false);
+	}
+
+	private void showStartGameButton() {
+		if (firstPlayer != null && secondPlayer != null) {
+			startGame.setVisible(true);
+		}
 	}
 }
