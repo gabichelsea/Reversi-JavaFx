@@ -2,7 +2,7 @@ package hu.unideb.inf.reversi.view.main;
 
 import java.io.IOException;
 
-import hu.unideb.inf.reversi.view.util.SpringFxmlLoader;
+import hu.unideb.inf.reversi.view.utility.SpringFxmlLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

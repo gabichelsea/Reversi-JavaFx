@@ -1,3 +1,5 @@
 *.project
 *.classpath
 *.class
+target
+/Reversi-JavaFx-Application/reversi-core/.settings

@@ -1,4 +1,4 @@
-package hu.unideb.inf.reversi.view.util;
+package hu.unideb.inf.reversi.view.utility;
 
 import java.io.IOException;
 import java.io.InputStream;

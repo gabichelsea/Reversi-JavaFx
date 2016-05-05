@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>hu.unideb.inf.reversi.view</groupId>
 	<artifactId>reversi-view</artifactId>
-
+	
 
 	<dependencies>
 		<dependency>
