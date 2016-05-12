@@ -1,4 +1,4 @@
-package hu.unideb.inf.reversi.view.board;
+package hu.unideb.inf.reversi.service.board;
 
 import javafx.scene.layout.GridPane;
 

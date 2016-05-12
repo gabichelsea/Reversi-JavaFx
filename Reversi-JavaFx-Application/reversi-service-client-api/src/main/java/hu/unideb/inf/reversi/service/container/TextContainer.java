@@ -1,4 +1,4 @@
-package hu.unideb.inf.reversi.view.container;
+package hu.unideb.inf.reversi.service.container;
 
 public class TextContainer {
 	

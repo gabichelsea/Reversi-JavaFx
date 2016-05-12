@@ -1,14 +1,14 @@
-package hu.unideb.inf.reversi.view.board;
+package hu.unideb.inf.reversi.service.board;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hu.unideb.inf.reversi.service.container.ImageContainer;
 import hu.unideb.inf.reversi.service.model.CellPosition;
-import hu.unideb.inf.reversi.view.container.ImageContainer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ImageGameBoard<T> extends GameBoard<T> {
+public abstract class ImageGameBoard<T> extends GameBoard<T> {
 
 	private List<ImageView> imageViewList;
 	private ImageContainer<T> imageContainer = new ImageContainer<T>();

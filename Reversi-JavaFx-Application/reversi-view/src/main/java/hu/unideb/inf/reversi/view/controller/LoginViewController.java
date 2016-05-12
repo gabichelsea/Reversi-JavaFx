@@ -3,9 +3,9 @@ package hu.unideb.inf.reversi.view.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import hu.unideb.inf.reversi.service.container.TextContainer;
 import hu.unideb.inf.reversi.service.interfaces.PlayerService;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
-import hu.unideb.inf.reversi.view.container.TextContainer;
 import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

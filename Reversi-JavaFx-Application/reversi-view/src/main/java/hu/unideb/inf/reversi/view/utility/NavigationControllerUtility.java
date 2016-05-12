@@ -1,6 +1,6 @@
 package hu.unideb.inf.reversi.view.utility;
 
-import hu.unideb.inf.reversi.view.container.TextContainer;
+import hu.unideb.inf.reversi.service.container.TextContainer;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
 <?import javafx.scene.layout.BorderPane?>
-<?import hu.unideb.inf.reversi.view.board.ReversiGameBoard?>
+<?import hu.unideb.inf.reversi.service.board.ReversiGameBoard?>
+<?import javafx.scene.control.Button?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="hu.unideb.inf.reversi.view.controller.ReversiViewController">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+	fx:controller="hu.unideb.inf.reversi.view.controller.ReversiViewController">
 	<center>
 		<ReversiGameBoard fx:id="gameBoard" columns="8" rows="8">
 		</ReversiGameBoard>
 	</center>
+	<bottom>
+		<Button text="New game" onAction="#newGameButtonAction"></Button>
+	</bottom>
 </BorderPane>
