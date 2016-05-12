@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import hu.unideb.inf.reversi.service.interfaces.PlayerService;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
+import hu.unideb.inf.reversi.view.container.TextContainer;
 import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
-import hu.unideb.inf.reversi.view.utility.TextDisplayUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -62,19 +62,19 @@ public class LoginViewController {
 			if (firstPlayer != null) {
 				String password = firstPlayerPasswordTextField.getText();
 				if (checkFirstPlayerByPassword(password)) {
-					firstPlayerLoginLabel.setText(TextDisplayUtility.SUCCES_LOGIN);
+					firstPlayerLoginLabel.setText(TextContainer.SUCCES_LOGIN);
 					hideFirstPlayerComponents();
 
 				} else {
-					firstPlayerLoginLabel.setText(TextDisplayUtility.INCORRECT_PASSWORD);
+					firstPlayerLoginLabel.setText(TextContainer.INCORRECT_PASSWORD);
 					firstPlayer = null;
 				}
 			} else {
-				firstPlayerLoginLabel.setText(TextDisplayUtility.USER_NOT_EXISTS);
+				firstPlayerLoginLabel.setText(TextContainer.USER_NOT_EXISTS);
 				firstPlayer = null;
 			}
 		} else {
-			firstPlayerLoginLabel.setText(TextDisplayUtility.THIS_USER_IS_ALREADY_LOGGED_IN);
+			firstPlayerLoginLabel.setText(TextContainer.THIS_USER_IS_ALREADY_LOGGED_IN);
 		}
 		showStartGameButton();
 	}
@@ -87,19 +87,19 @@ public class LoginViewController {
 			if (secondPlayer != null) {
 				String password = secondPlayerPasswordTextField.getText();
 				if (checkSecondPlayerByPassword(password)) {
-					secondPlayerLoginLabel.setText(TextDisplayUtility.SUCCES_LOGIN);
+					secondPlayerLoginLabel.setText(TextContainer.SUCCES_LOGIN);
 					hideSecondPlayerComponents();
 
 				} else {
-					secondPlayerLoginLabel.setText(TextDisplayUtility.INCORRECT_PASSWORD);
+					secondPlayerLoginLabel.setText(TextContainer.INCORRECT_PASSWORD);
 					secondPlayer = null;
 				}
 			} else {
-				secondPlayerLoginLabel.setText(TextDisplayUtility.USER_NOT_EXISTS);
+				secondPlayerLoginLabel.setText(TextContainer.USER_NOT_EXISTS);
 				secondPlayer = null;
 			}
 		} else {
-			secondPlayerLoginLabel.setText(TextDisplayUtility.THIS_USER_IS_ALREADY_LOGGED_IN);
+			secondPlayerLoginLabel.setText(TextContainer.THIS_USER_IS_ALREADY_LOGGED_IN);
 		}
 		showStartGameButton();
 	}
@@ -145,5 +145,21 @@ public class LoginViewController {
 		if (firstPlayer != null && secondPlayer != null) {
 			startGame.setVisible(true);
 		}
+	}
+
+	public PlayerVo getFirstPlayer() {
+		return firstPlayer;
+	}
+
+	public void setFirstPlayer(PlayerVo firstPlayer) {
+		this.firstPlayer = firstPlayer;
+	}
+
+	public PlayerVo getSecondPlayer() {
+		return secondPlayer;
+	}
+
+	public void setSecondPlayer(PlayerVo secondPlayer) {
+		this.secondPlayer = secondPlayer;
 	}
 }
