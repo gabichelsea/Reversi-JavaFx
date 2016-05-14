@@ -3,6 +3,7 @@ package hu.unideb.inf.reversi.service.interfaces.impl;
 import org.springframework.stereotype.Service;
 
 import hu.unideb.inf.reversi.service.board.ReversiGameBoard;
+import hu.unideb.inf.reversi.service.container.TextContainer;
 import hu.unideb.inf.reversi.service.enums.ActualPlayer;
 import hu.unideb.inf.reversi.service.enums.CellType;
 import hu.unideb.inf.reversi.service.interfaces.CellApplyService;
@@ -50,25 +51,25 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		String secondPlayerName = secondPlayer.getUserName();
 		firstPlayer.setScore(countPieces(ActualPlayer.FIRST_PLAYER));
 		secondPlayer.setScore(countPieces(ActualPlayer.SECOND_PLAYER));
-		status = firstPlayerName + ": " + firstPlayer.getScore() + "\n" + secondPlayerName + ": "
-				+ secondPlayer.getScore() + "\n";
+		status = firstPlayerName + ": " + firstPlayer.getScore() + "\t" + secondPlayerName + ": "
+				+ secondPlayer.getScore() + "\t";
 		isGameOver();
 
-		if (getRemainingValidCells(checkAnotherPlayer()) == 0) {
-			status += getPlayerName(actualPlayer) + " passzolnia kell.\n";
+		if (countRemainingValidCells(checkAnotherPlayer()) == 0) {
+			status += getPlayerName(actualPlayer) + TextContainer.MUST_PASS + "\t";
 		}
-		status += getPlayerName(checkAnotherPlayer()) + " következik!";
+		status += getPlayerName(checkAnotherPlayer()) + TextContainer.NEXT + "\n";
 		statusLabel.setText(status);
 	}
 
 	public void isGameOver() {
 		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
 			if (firstPlayer.getScore() > secondPlayer.getScore()) {
-				status = status + firstPlayer.getUserName() + " nyert!";
+				status = status + firstPlayer.getUserName() + TextContainer.WON;
 			} else if (secondPlayer.getScore() > firstPlayer.getScore()) {
-				status = status + secondPlayer.getUserName() + " nyert!";
+				status = status + secondPlayer.getUserName() + TextContainer.WON;
 			} else {
-				status = "Döntetlen";
+				status = TextContainer.DRAW;
 			}
 		}
 	}
@@ -100,10 +101,10 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	private void nextPlayer() {
-		if (getRemainingValidCells(checkAnotherPlayer()) > 0) {
+		if (countRemainingValidCells(checkAnotherPlayer()) > 0) {
 			actualPlayer = checkAnotherPlayer();
 		}
-		if (getRemainingValidCells(actualPlayer) == 0) {
+		if (countRemainingValidCells(actualPlayer) == 0) {
 			actualPlayer = ActualPlayer.NOBODY;
 		}
 	}
@@ -113,7 +114,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return countCellsIf((cellPosition) -> cellType.equals(gameBoard.getCellByPosition(cellPosition)));
 	}
 
-	Integer getRemainingValidCells(ActualPlayer actualPlayer) {
+	Integer countRemainingValidCells(ActualPlayer actualPlayer) {
 		return countCellsIf((cellPosition) -> turnPieces(actualPlayer, cellPosition, false) > 0);
 	}
 
@@ -163,6 +164,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		}
 		CellPosition cellPosition = new CellPosition(x, y);
 		Integer count = turnPieces(actualPlayer, cellPosition, false);
+		updateStatus();
 		if (count > 0) {
 			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
 
