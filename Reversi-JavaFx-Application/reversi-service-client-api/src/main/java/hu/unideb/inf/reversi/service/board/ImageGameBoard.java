@@ -50,4 +50,7 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	public ImageContainer<T> getImageContainer() {
 		return imageContainer;
 	}
+	
+	
+	
 }

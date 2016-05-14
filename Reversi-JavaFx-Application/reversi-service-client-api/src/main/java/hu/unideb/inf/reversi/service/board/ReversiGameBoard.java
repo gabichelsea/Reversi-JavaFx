@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.unideb.inf.reversi.service.enums.CellType;
+import hu.unideb.inf.reversi.service.interfaces.CellApplyService;
 import hu.unideb.inf.reversi.service.interfaces.CellService;
 import hu.unideb.inf.reversi.service.model.CellPosition;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 
 public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellService {
 
@@ -66,6 +69,37 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 
 	public void fillAllGrid(CellType value) {
 		fillCells(value);
+	}
+
+	@Override
+	public <T> T applyCell(CellApplyService<T> cellApplyService, Node child) {
+		Integer x = findX(cellApplyService, child);
+		Integer y = findY(cellApplyService, child);
+		if (x != null && y != null) {
+			return cellApplyService.applyCell(new CellPosition(x, y));
+		}
+
+		return null;
+	}
+
+	private <T> Integer findX(CellApplyService<T> cellApplyService, Node child) {
+		Integer x = null;
+		for (Node node = child; node != this; node = node.getParent()) {
+			if ((x = GridPane.getColumnIndex(node)) != null) {
+				break;
+			}
+		}
+		return x;
+	}
+
+	private <T> Integer findY(CellApplyService<T> cellApplyService, Node child) {
+		Integer y = null;
+		for (Node node = child; node != this; node = node.getParent()) {
+			if ((y = GridPane.getRowIndex(node)) != null) {
+				break;
+			}
+		}
+		return y;
 	}
 
 }

@@ -7,6 +7,7 @@ public abstract class GameBoard<T> extends GridPane {
 	protected Integer rows;
 	protected Integer columns;
 
+
 	public GameBoard() {
 		this.rows = 0;
 		this.columns = 0;

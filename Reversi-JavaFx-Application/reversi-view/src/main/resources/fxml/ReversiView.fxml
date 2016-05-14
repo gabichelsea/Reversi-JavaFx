@@ -3,11 +3,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import hu.unideb.inf.reversi.service.board.ReversiGameBoard?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
 	fx:controller="hu.unideb.inf.reversi.view.controller.ReversiViewController">
+	<top>
+	<Label fx:id="statusLabel"></Label>
+	</top>
 	<center>
-		<ReversiGameBoard fx:id="gameBoard" columns="8" rows="8">
+		<ReversiGameBoard fx:id="gameBoard" columns="8" rows="8" onMouseClicked="#mouseClicked">
 		</ReversiGameBoard>
 	</center>
 	<bottom>
