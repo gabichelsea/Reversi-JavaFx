@@ -1,5 +1,7 @@
 package hu.unideb.inf.reversi.service.interfaces.impl;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,12 +16,24 @@ import hu.unideb.inf.reversi.service.vo.PlayerVo;
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerServiceImpl implements PlayerService {
 
+	private static final Logger logger = LogManager.getLogger(PlayerServiceImpl.class);
+
 	@Autowired
 	PlayerRepository playerRepository;
 
 	@Override
 	public PlayerVo getByUserName(String userName) throws Exception {
 		return PlayerMapper.toVo(playerRepository.findByUserName(userName));
+	}
+
+	@Override
+	public void add(PlayerVo playerVo) throws Exception {
+		try {
+			playerRepository.saveAndFlush(PlayerMapper.toDto(playerVo));
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			throw e;
+		}
 	}
 
 }

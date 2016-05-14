@@ -15,6 +15,6 @@
 		</ReversiGameBoard>
 	</center>
 	<bottom>
-		<Button text="New game" onAction="#newGameButtonAction"></Button>
+		<Button text="Új játék" onAction="#newGameButtonAction"></Button>
 	</bottom>
 </BorderPane>
