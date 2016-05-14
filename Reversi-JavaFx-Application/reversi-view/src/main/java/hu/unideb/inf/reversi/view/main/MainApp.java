@@ -8,19 +8,24 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+	
+	public static Stage primaryStage;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
-		NavigationControllerUtility.loadLoginView(primaryStage);
+	public void start(Stage stage) throws IOException {
+		primaryStage = stage;
+		NavigationControllerUtility.loadMainPageView(primaryStage);
 	}
 
 	@Override
 	public void stop() throws Exception {
 		SpringFxmlLoader.close();
 	}
+	
+	
 
 }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import hu.unideb.inf.reversi.core.entity.Player;
 
 @Repository
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.SUPPORTS)
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 	
 	public Player findByUserName(String userName) throws Exception;

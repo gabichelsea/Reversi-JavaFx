@@ -50,6 +50,7 @@ public class ReversiViewController {
 
 	@FXML
 	protected void newGameButtonAction() {
+		initReversiGameManager();
 		gameManager.newGame();
 	}
 
