@@ -2,6 +2,7 @@ package hu.unideb.inf.reversi.service.interfaces;
 
 import hu.unideb.inf.reversi.service.enums.CellType;
 import hu.unideb.inf.reversi.service.model.CellPosition;
+import javafx.scene.Node;
 
 public interface CellService {
 
@@ -12,8 +13,12 @@ public interface CellService {
 	public void updateCell(CellPosition cellPosition);
 
 	public void fillCells(CellType value);
+	
+	public void fillAllGrid(CellType value);
 
 	public CellType getCellByPosition(CellPosition cellPosition);
 
 	public Integer getCellPositionNumber(CellPosition cellPosition);
+	
+	public <T> T applyCell(CellApplyService<T> cellApplyService, Node child);
 }
