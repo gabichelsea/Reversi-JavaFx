@@ -4,6 +4,7 @@ import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,9 +53,10 @@ public class RegisterViewController {
 			statusLabel.setText(e.getMessage());
 		} catch (ConstraintViolationException e) {
 			logger.error(e.getMessage(), e);
-			statusLabel.setText(TextContainer.USER_IS_EXIST + " vagy\n" + TextContainer.REGISTER_CONSTRAINT);
+			statusLabel.setText(TextContainer.REGISTER_CONSTRAINT);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
+			statusLabel.setText(TextContainer.USER_IS_EXIST);
 		}
 	}
 
