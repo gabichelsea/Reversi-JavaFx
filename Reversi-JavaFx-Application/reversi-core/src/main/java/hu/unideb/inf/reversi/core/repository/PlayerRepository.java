@@ -12,7 +12,7 @@ import hu.unideb.inf.reversi.core.entity.Player;
  * legfontosabb müveleteket
  */
 @Repository
-@Transactional(propagation = Propagation.SUPPORTS)
+@Transactional(propagation = Propagation.REQUIRED)
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
 	/**
@@ -22,5 +22,4 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
 	 * @throws Exception Kivétel dobása, amennyiben kivétel váltódik ki
 	 */
 	public Player findByUserName(String userName) throws Exception;
-
 }

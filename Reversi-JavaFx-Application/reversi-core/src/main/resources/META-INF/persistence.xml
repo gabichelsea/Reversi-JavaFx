@@ -10,6 +10,7 @@
 
 		<class>hu.unideb.inf.reversi.core.entity.BaseEntity</class>
 		<class>hu.unideb.inf.reversi.core.entity.Player</class>
+		<class>hu.unideb.inf.reversi.core.entity.PlayerResult</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		

@@ -20,12 +20,13 @@ public class Player extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Felhasználónév, amelynek egyedinek kell lennie és legalább 3 karaktert kell tartalmaznia
+	 * Felhasználónév, amelynek egyedinek kell lennie és legalább 3 karaktert
+	 * kell tartalmaznia
 	 */
 	@Column(name = "user_name", unique = true)
 	@Size(min = 3)
 	private String userName;
-	
+
 	/**
 	 * Jelszó, amely legalább 5 karakterből kell hogy álljon
 	 */
@@ -34,13 +35,15 @@ public class Player extends BaseEntity {
 	private String password;
 
 	/**
-	 * Alapértelmezett paraméter nélküli konstruktor, ami a {@link Serializable} interfész miatt ajánlott
+	 * Alapértelmezett paraméter nélküli konstruktor, ami a {@link Serializable}
+	 * interfész miatt ajánlott
 	 */
 	public Player() {
 	}
 
 	/**
 	 * Visszaadja az adott Játékos objektum felhasználónevét
+	 * 
 	 * @return userName A Player objektumhoz tartozó felhasználónév
 	 */
 	public String getUserName() {
@@ -49,7 +52,9 @@ public class Player extends BaseEntity {
 
 	/**
 	 * Beállítja az adott Játékos objektum felhasználónevét
-	 * @param userName A paraméterben szereplő felhasználónév
+	 * 
+	 * @param userName
+	 *            A paraméterben szereplő felhasználónév
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -57,6 +62,7 @@ public class Player extends BaseEntity {
 
 	/**
 	 * Visszaadja az adott Játékos objektum jelszavát
+	 * 
 	 * @return password A Player objektumhoz tartozó jelszó
 	 */
 	public String getPassword() {
@@ -65,7 +71,9 @@ public class Player extends BaseEntity {
 
 	/**
 	 * Beállítja az adott Játékos objektum jelszavát
-	 * @param password A paraméterben szereplő jelszó
+	 * 
+	 * @param password
+	 *            A paraméterben szereplő jelszó
 	 */
 	public void setPassword(String password) {
 		this.password = password;

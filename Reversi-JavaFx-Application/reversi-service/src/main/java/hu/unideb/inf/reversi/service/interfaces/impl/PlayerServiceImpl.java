@@ -15,7 +15,6 @@ import hu.unideb.inf.reversi.service.vo.PlayerVo;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerServiceImpl implements PlayerService {
-
 	private static final Logger logger = LogManager.getLogger(PlayerServiceImpl.class);
 
 	@Autowired

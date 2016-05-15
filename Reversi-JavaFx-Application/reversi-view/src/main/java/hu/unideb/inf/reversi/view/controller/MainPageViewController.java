@@ -32,7 +32,7 @@ public class MainPageViewController {
 
 	@FXML
 	protected void rankingButtonAction(ActionEvent event) {
-
+		NavigationControllerUtility.loadRankingView(event);
 	}
 
 	@FXML

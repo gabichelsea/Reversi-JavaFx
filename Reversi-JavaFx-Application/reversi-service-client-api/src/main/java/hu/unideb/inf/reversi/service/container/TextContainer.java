@@ -17,6 +17,7 @@ public class TextContainer {
 	public static final String MAIN_PAGE_TITLE = "Főoldal";
 	public static final String REGISTER_VIEW_TITLE = "Regisztráció";
 	public static final String LOGIN_VIEW_TITLE = "Bejelentkezés";
+	public static final String RANKING_VIEW_TITLE = "Rangsor";
 	public static final String REVERSI_VIEW_TITLE = "Reversi";
 
 	public static final String USER_IS_EXIST = "Ez a felhasználó már létezik";
