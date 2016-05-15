@@ -8,14 +8,31 @@ import hu.unideb.inf.reversi.service.model.CellPosition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * KépesJátékTábla amely tartalmazz egy képtárolót és egy képlistát ami mátrixot szimulál
+ * @param <T> Amely egy általános típust jelöl
+ */
 public abstract class ImageGameBoard<T> extends GameBoard<T> {
 
+	/**
+	 * Képlista, ami mátrixnak feletethető meg
+	 */
 	private List<ImageView> imageViewList;
+	
+	/**
+	 * Képtároló, amelyből a képlistánkat felépítjük
+	 */
 	private ImageContainer<T> imageContainer = new ImageContainer<T>();
 
+	/**
+	 * Alapértelmezett konstruktor hogy legyen
+	 */
 	public ImageGameBoard() {
 	}
 
+	/**
+	 * Beállítja a képListánk méretét a sorok és oszlopok számának szorzatára
+	 */
 	@Override
 	protected void setDimensions(Integer columns, Integer rows) {
 		imageViewList = new ArrayList<ImageView>();
@@ -23,7 +40,7 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 			imageViewList.add(null);
 		}
 	}
-
+	
 	public void setImage(T imageKey, CellPosition cellPosition) {
 		ImageView imageView = getImageView(imageKey, cellPosition);
 		Image image = getImageByKey(imageKey);
