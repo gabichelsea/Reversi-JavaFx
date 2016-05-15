@@ -1,5 +1,7 @@
 package hu.unideb.inf.reversi.view.controller;
 
+import javax.validation.ConstraintViolationException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +50,19 @@ public class RegisterViewController {
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage(), e);
 			statusLabel.setText(e.getMessage());
+		} catch (ConstraintViolationException e) {
+			logger.error(e.getMessage(), e);
+			statusLabel.setText(TextContainer.USER_IS_EXIST + " vagy\n" + TextContainer.REGISTER_CONSTRAINT);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			statusLabel.setText(TextContainer.REGISTER_CONSTRAINT);
 		}
 	}
-	
+
 	@FXML
 	protected void backToTheMainPageButtonAction(ActionEvent event) {
 		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
 	}
-	
+
 	private void succesRegister() {
 		statusLabel.setText("Siker");
 		userNameField.setText(null);
@@ -74,11 +78,9 @@ public class RegisterViewController {
 			String password = passwordField.getText().trim();
 			playerVo.setUserName(userName);
 			playerVo.setPassword(password);
-			System.out.println(userName);
-			System.out.println(password);
 		} else {
 			throw new IllegalArgumentException(TextContainer.PASSWORDS_ARE_NOT_EQUAL);
 		}
-		
+
 	}
 }

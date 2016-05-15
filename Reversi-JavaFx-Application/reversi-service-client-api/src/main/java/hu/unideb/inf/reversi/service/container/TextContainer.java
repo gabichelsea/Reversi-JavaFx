@@ -19,6 +19,7 @@ public class TextContainer {
 	public static final String LOGIN_VIEW_TITLE = "Bejelentkezés";
 	public static final String REVERSI_VIEW_TITLE = "Reversi";
 
+	public static final String USER_IS_EXIST = "Ez a felhasználó már létezik";
 	public static final String PASSWORDS_ARE_NOT_EQUAL = "A jelszavak nem egyeznek";
 	public static final String REGISTER_CONSTRAINT = "Legalább 3 hosszúságú felhasználónév és 5 hosszúságú jelszó legyen";
 
