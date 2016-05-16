@@ -13,6 +13,8 @@ import hu.unideb.inf.reversi.service.interfaces.impl.ReversiGameManagerImpl;
 import hu.unideb.inf.reversi.service.utility.TimerUtility;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
+import hu.unideb.inf.reversi.view.main.MainApp;
+import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -87,6 +89,11 @@ public class ReversiViewController {
 	protected void newGameButtonAction() {
 		initReversiGameManager();
 		gameManager.newGame();
+	}
+	
+	@FXML
+	protected void backToTheMainPage() {
+		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
 	}
 
 	@FXML
