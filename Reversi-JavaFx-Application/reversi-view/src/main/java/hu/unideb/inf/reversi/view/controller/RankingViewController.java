@@ -10,6 +10,8 @@ import hu.unideb.inf.reversi.service.interfaces.PlayerResultService;
 import hu.unideb.inf.reversi.service.utility.PlayerResultVoComparator;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 import hu.unideb.inf.reversi.view.bean.PlayerResultBean;
+import hu.unideb.inf.reversi.view.main.MainApp;
+import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
 import hu.unideb.inf.reversi.view.utility.PlayerResultBeanConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,6 +73,11 @@ public class RankingViewController {
 		scoreColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("score"));
 
 		table.setItems(data);
+	}
+	
+	@FXML
+	protected void backToTheMainPage() {
+		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
 	}
 
 }

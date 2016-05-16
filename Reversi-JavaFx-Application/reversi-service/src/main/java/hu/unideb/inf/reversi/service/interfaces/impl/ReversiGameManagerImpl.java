@@ -67,7 +67,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 
-	public void GameOver() {
+	public void gameOver() {
 		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
 			if (firstPlayer.getScore() > secondPlayer.getScore()) {
 				status = firstPlayer.getUserName() + TextContainer.WON;
@@ -181,7 +181,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 
 				nextPlayer();
 				updateStatus();
-				GameOver();
+				gameOver();
 			});
 		}
 		return true;

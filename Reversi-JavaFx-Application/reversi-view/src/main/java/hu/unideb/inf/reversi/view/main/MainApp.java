@@ -8,7 +8,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-	
+
 	public static Stage primaryStage;
 
 	public static void main(String[] args) {
@@ -25,7 +25,5 @@ public class MainApp extends Application {
 	public void stop() throws Exception {
 		SpringFxmlLoader.close();
 	}
-	
-	
 
 }

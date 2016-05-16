@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
 import hu.unideb.inf.reversi.view.utility.SpringFxmlLoader;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,6 +39,6 @@ public class MainPageViewController {
 	@FXML
 	protected void exitButtonAction(ActionEvent event) {
 		SpringFxmlLoader.close();
-		System.exit(0);
+		Platform.exit();
 	}
 }
