@@ -19,6 +19,8 @@ public final class NavigationControllerUtility {
 
 		primaryStage.setTitle(TextContainer.MAIN_PAGE_TITLE);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
 		primaryStage.show();
 	}
 
@@ -28,6 +30,8 @@ public final class NavigationControllerUtility {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle(TextContainer.REGISTER_VIEW_TITLE);
 		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.centerOnScreen();
 	}
 
 	public static void loadLoginView(ActionEvent event) {
@@ -37,6 +41,8 @@ public final class NavigationControllerUtility {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle(TextContainer.LOGIN_VIEW_TITLE);
 		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.centerOnScreen();
 	}
 
 	public static void loadGameView(ActionEvent event) {
@@ -45,6 +51,8 @@ public final class NavigationControllerUtility {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle(TextContainer.REVERSI_VIEW_TITLE);
 		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.centerOnScreen();
 	}
 
 	public static void loadRankingView(ActionEvent event) {
@@ -53,6 +61,8 @@ public final class NavigationControllerUtility {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle(TextContainer.RANKING_VIEW_TITLE);
 		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.centerOnScreen();
 	}
 
 }

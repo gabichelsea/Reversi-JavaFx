@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import hu.unideb.inf.reversi.service.container.TextContainer;
+import hu.unideb.inf.reversi.service.interfaces.PlayerResultService;
 import hu.unideb.inf.reversi.service.interfaces.PlayerService;
+import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
 import hu.unideb.inf.reversi.view.main.MainApp;
 import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
@@ -24,6 +26,8 @@ public class RegisterViewController {
 
 	@Autowired
 	PlayerService playerService;
+	@Autowired
+	PlayerResultService playerResultService;
 
 	private PlayerVo playerVo;
 
@@ -45,7 +49,7 @@ public class RegisterViewController {
 	protected void registerButtonAction() {
 		try {
 			setUpPlayer();
-			playerService.add(playerVo);
+			registerPlayer(playerVo);
 			succesRegister();
 		} catch (IllegalArgumentException e) {
 			logger.error(e.getMessage(), e);
@@ -66,9 +70,9 @@ public class RegisterViewController {
 
 	private void succesRegister() {
 		statusLabel.setText("Siker");
-		userNameField.setText(null);
-		passwordField.setText(null);
-		passwordAgainField.setText(null);
+		userNameField.setText("");
+		passwordField.setText("");
+		passwordAgainField.setText("");
 	}
 
 	private void setUpPlayer() {
@@ -82,6 +86,12 @@ public class RegisterViewController {
 		} else {
 			throw new IllegalArgumentException(TextContainer.PASSWORDS_ARE_NOT_EQUAL);
 		}
-
 	}
+
+	private void registerPlayer(PlayerVo playerVo) throws Exception {
+		PlayerResultVo playerResultVo = new PlayerResultVo();
+		playerResultVo.setPlayer(playerVo);
+		playerResultService.add(playerResultVo);
+	}
+
 }

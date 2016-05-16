@@ -1,18 +1,19 @@
 package hu.unideb.inf.reversi.core.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "player_result")
 public class PlayerResult extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "player_id")
 	private Player player;
 
@@ -33,6 +34,16 @@ public class PlayerResult extends BaseEntity {
 
 	@Column(name = "lost_pieces")
 	private Integer lostPieces;
+
+	@PrePersist
+	private void init() {
+		numberOfMatches = 0;
+		win = 0;
+		draw = 0;
+		lose = 0;
+		wonPieces = 0;
+		lostPieces = 0;
+	}
 
 	public PlayerResult() {
 	}
