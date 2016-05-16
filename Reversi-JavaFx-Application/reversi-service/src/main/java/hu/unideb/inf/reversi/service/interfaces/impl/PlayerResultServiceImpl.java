@@ -18,7 +18,7 @@ import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerResultServiceImpl implements PlayerResultService {
 	private static final Logger logger = LogManager.getLogger(PlayerResultServiceImpl.class);
-	
+
 	@Autowired
 	PlayerResultRepository playerResultRepository;
 
@@ -31,7 +31,7 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public PlayerResultVo getByPlayerId(Long playerId) throws Exception {
 		return PlayerResultMapper.toVo(playerResultRepository.findByPlayerId(playerId));
@@ -44,16 +44,7 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 
 	@Override
 	public void removeByPlayerId(Long playerId) throws Exception {
-		try {
-			playerResultRepository.deleteByPlayerId(playerId);
-		} catch(Exception e) {
-			logger.error(e.getMessage(), e);
-			throw e;
-		}
+		playerResultRepository.deleteByPlayerId(playerId);
 	}
 
-
-
-
-	
 }

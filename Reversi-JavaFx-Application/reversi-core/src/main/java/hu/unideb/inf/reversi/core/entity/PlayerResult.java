@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "player_result")
@@ -15,6 +16,7 @@ public class PlayerResult extends BaseEntity {
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "player_id")
+	@NotNull
 	private Player player;
 
 	@Column(name = "number_of_matches")
