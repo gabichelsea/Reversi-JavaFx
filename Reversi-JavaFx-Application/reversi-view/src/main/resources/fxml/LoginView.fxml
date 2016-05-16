@@ -11,7 +11,7 @@
 	prefWidth="999.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="hu.unideb.inf.reversi.view.controller.LoginViewController">
 	<children>
-		<Label layoutX="453.0" layoutY="33.0" text="Reversi-javaFx"
+		<Label fx:id="titleLabel" layoutX="453.0" layoutY="33.0" text="Reversi-javaFx"
 			textAlignment="CENTER" />
 		<Label fx:id="firstPlayerLoginLabel" layoutX="224.0" layoutY="94.0" />
 		<Label fx:id="secondPlayerLoginLabel" layoutX="641.0" layoutY="94.0" />

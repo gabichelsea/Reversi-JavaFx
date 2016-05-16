@@ -108,10 +108,5 @@ public class PlayerResultServiceTest {
 		}
 	}
 
-	@Test(expected = Exception.class)
-	public void removeByPlayerIdTestWithFail() throws Exception {
-		playerResultService.removeByPlayerId(-1L);
-
-	}
 
 }

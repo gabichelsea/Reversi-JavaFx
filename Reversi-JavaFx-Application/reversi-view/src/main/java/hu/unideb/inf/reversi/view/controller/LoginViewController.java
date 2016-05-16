@@ -22,6 +22,9 @@ public class LoginViewController {
 
 	private PlayerVo firstPlayer;
 	private PlayerVo secondPlayer;
+	
+	@FXML
+	private Label titleLabel;
 
 	@FXML
 	private Label firstPlayerUserNameLabel;

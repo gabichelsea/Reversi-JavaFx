@@ -16,6 +16,7 @@ public final class NavigationControllerUtility {
 	public static void loadMainPageView(Stage primaryStage) {
 		Parent root = (Parent) loader.load("/fxml/MainPageView.fxml");
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(NavigationControllerUtility.class.getResource("/css/mainPage.css").toExternalForm());
 
 		primaryStage.setTitle(TextContainer.MAIN_PAGE_TITLE);
 		primaryStage.setScene(scene);
@@ -58,6 +59,8 @@ public final class NavigationControllerUtility {
 	public static void loadRankingView(ActionEvent event) {
 		Parent parent = (Parent) loader.load("/fxml/RankingView.fxml");
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add(NavigationControllerUtility.class.getResource("/css/darkTheme.css").toExternalForm());
+		
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle(TextContainer.RANKING_VIEW_TITLE);
 		stage.setScene(scene);
