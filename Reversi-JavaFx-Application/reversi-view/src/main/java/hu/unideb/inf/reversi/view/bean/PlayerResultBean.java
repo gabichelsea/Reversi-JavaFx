@@ -1,8 +1,8 @@
-package hu.unideb.inf.reversi.view.utility;
+package hu.unideb.inf.reversi.view.bean;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class PlayerResultUtil {
+public class PlayerResultBean {
 
 	private SimpleStringProperty playerName;
 	private SimpleStringProperty numberOfMatches;
@@ -14,7 +14,7 @@ public class PlayerResultUtil {
 	private SimpleStringProperty differentPieces;
 	private SimpleStringProperty score;
 
-	public PlayerResultUtil() {
+	public PlayerResultBean() {
 		this.playerName = new SimpleStringProperty();
 		this.numberOfMatches = new SimpleStringProperty();
 		this.win = new SimpleStringProperty();
@@ -26,7 +26,7 @@ public class PlayerResultUtil {
 		this.score = new SimpleStringProperty();
 	}
 
-	public PlayerResultUtil(String playerName, String numberOfMatches, String win, String draw, String lose,
+	public PlayerResultBean(String playerName, String numberOfMatches, String win, String draw, String lose,
 			String wonPieces, String lostPieces, String differentPieces, String score) {
 		this.playerName = new SimpleStringProperty(playerName);
 		this.numberOfMatches = new SimpleStringProperty(numberOfMatches);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import hu.unideb.inf.reversi.service.container.TextContainer;
 import hu.unideb.inf.reversi.service.interfaces.PlayerService;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
+import hu.unideb.inf.reversi.view.main.MainApp;
 import hu.unideb.inf.reversi.view.utility.NavigationControllerUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -107,6 +108,11 @@ public class LoginViewController {
 	@FXML
 	protected void startGameButtonAction(ActionEvent event) {
 		NavigationControllerUtility.loadGameView(event);
+	}
+	
+	@FXML
+	protected void backToTheMainPage() {
+		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
 	}
 
 	private Boolean checkFirstPlayerByName(String userName) throws Exception {

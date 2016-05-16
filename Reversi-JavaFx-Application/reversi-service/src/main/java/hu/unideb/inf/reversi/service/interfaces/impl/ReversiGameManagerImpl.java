@@ -45,10 +45,10 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	@Override
 	public void newGame() {
 		gameBoard.fillAllGrid(CellType.EMPTY);
-		gameBoard.setCell(new CellPosition(3, 3), CellType.RED);
-		gameBoard.setCell(new CellPosition(3, 4), CellType.BLACK);
-		gameBoard.setCell(new CellPosition(4, 3), CellType.BLACK);
 		gameBoard.setCell(new CellPosition(4, 4), CellType.RED);
+		gameBoard.setCell(new CellPosition(4, 5), CellType.BLACK);
+		gameBoard.setCell(new CellPosition(5, 4), CellType.BLACK);
+		gameBoard.setCell(new CellPosition(5, 5), CellType.RED);
 
 		updateStatus();
 	}

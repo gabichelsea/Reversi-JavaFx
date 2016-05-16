@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import hu.unideb.inf.reversi.service.interfaces.PlayerResultService;
 import hu.unideb.inf.reversi.service.utility.PlayerResultVoComparator;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
-import hu.unideb.inf.reversi.view.utility.PlayerResultUtil;
-import hu.unideb.inf.reversi.view.utility.PlayerResultUtilConverter;
+import hu.unideb.inf.reversi.view.bean.PlayerResultBean;
+import hu.unideb.inf.reversi.view.utility.PlayerResultBeanConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,50 +25,50 @@ public class RankingViewController {
 	PlayerResultService playerResultService;
 
 	@FXML
-	private TableView<PlayerResultUtil> table = new TableView<PlayerResultUtil>();
+	private TableView<PlayerResultBean> table = new TableView<PlayerResultBean>();
 	@FXML
-	private TableColumn<PlayerResultUtil, String> playerNameColumn;
+	private TableColumn<PlayerResultBean, String> playerNameColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> numberOfMatchesColumn;
+	private TableColumn<PlayerResultBean, String> numberOfMatchesColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> winColumn;
+	private TableColumn<PlayerResultBean, String> winColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> drawColumn;
+	private TableColumn<PlayerResultBean, String> drawColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> loseColumn;
+	private TableColumn<PlayerResultBean, String> loseColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> wonPiecesColumn;
+	private TableColumn<PlayerResultBean, String> wonPiecesColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> lostPiecesColumn;
+	private TableColumn<PlayerResultBean, String> lostPiecesColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> differentPiecesColumn;
+	private TableColumn<PlayerResultBean, String> differentPiecesColumn;
 	@FXML
-	private TableColumn<PlayerResultUtil, String> scoreColumn;
-	private ObservableList<PlayerResultUtil> data;
+	private TableColumn<PlayerResultBean, String> scoreColumn;
+	private ObservableList<PlayerResultBean> data;
 
 	@FXML
 	protected void initialize() throws Exception {
 		List<PlayerResultVo> playerVoList = playerResultService.getAll().stream()
 				.sorted(new PlayerResultVoComparator().reversed())
 				.collect(Collectors.toList());
-		data = FXCollections.observableList(PlayerResultUtilConverter.toPlayerResultUtil(playerVoList));
+		data = FXCollections.observableList(PlayerResultBeanConverter.toPlayerResultUtil(playerVoList));
 
 		setUpTablewView();
 	}
 
 	private void setUpTablewView() {
 
-		playerNameColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("playerName"));
+		playerNameColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("playerName"));
 		numberOfMatchesColumn
-				.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("numberOfMatches"));
-		winColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("win"));
-		drawColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("draw"));
-		loseColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("lose"));
-		wonPiecesColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("wonPieces"));
-		lostPiecesColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("lostPieces"));
+				.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("numberOfMatches"));
+		winColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("win"));
+		drawColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("draw"));
+		loseColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("lose"));
+		wonPiecesColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("wonPieces"));
+		lostPiecesColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("lostPieces"));
 		differentPiecesColumn
-				.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("differentPieces"));
-		scoreColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultUtil, String>("score"));
+				.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("differentPieces"));
+		scoreColumn.setCellValueFactory(new PropertyValueFactory<PlayerResultBean, String>("score"));
 
 		table.setItems(data);
 	}

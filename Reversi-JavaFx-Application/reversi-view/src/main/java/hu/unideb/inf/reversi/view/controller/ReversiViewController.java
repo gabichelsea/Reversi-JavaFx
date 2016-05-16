@@ -1,5 +1,7 @@
 package hu.unideb.inf.reversi.view.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 
 @Component
 public class ReversiViewController {
+	private static final Logger logger = LogManager.getLogger(ReversiViewController.class);
 
 	@Autowired
 	private LoginViewController loginViewController;
@@ -89,20 +92,20 @@ public class ReversiViewController {
 	@FXML
 	public void mouseClicked(MouseEvent mouseEvent) {
 		gameManager.mouseClicked(mouseEvent);
-		TimerUtility.runDelayed(500, new Runnable() {
-
-			@Override
-			public void run() {
-				if ((firstPlayer.getScore() + secondPlayer.getScore()) == (gameBoard.getRows() * gameBoard.getColumns())
-						|| gameManager.getActualPlayer().equals(ActualPlayer.NOBODY)) {
-					try {
-						registerResult(firstPlayer, secondPlayer);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
+		TimerUtility.runDelayed(500, () -> {
+			tryToRegisterResult();
 		});
+	}
+
+	private void tryToRegisterResult() {
+		if ((firstPlayer.getScore() + secondPlayer.getScore()) == (gameBoard.getRows() * gameBoard.getColumns())
+				|| gameManager.getActualPlayer().equals(ActualPlayer.NOBODY)) {
+			try {
+				registerResult(firstPlayer, secondPlayer);
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+			}
+		}
 	}
 
 	private void initReversiGameManager() {
