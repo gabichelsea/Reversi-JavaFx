@@ -25,6 +25,14 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	private String status;
 	private Label statusLabel;
 
+	public ActualPlayer getActualPlayer() {
+		return actualPlayer;
+	}
+
+	public void setActualPlayer(ActualPlayer actualPlayer) {
+		this.actualPlayer = actualPlayer;
+	}
+
 	public ReversiGameManagerImpl() {
 	}
 
@@ -52,25 +60,25 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		firstPlayer.setScore(countPieces(ActualPlayer.FIRST_PLAYER));
 		secondPlayer.setScore(countPieces(ActualPlayer.SECOND_PLAYER));
 		status = firstPlayerName + ": " + firstPlayer.getScore() + "\t" + secondPlayerName + ": "
-				+ secondPlayer.getScore() + "\t";
-		isGameOver();
+				+ secondPlayer.getScore() + "\n";
 
-		if (countRemainingValidCells(checkAnotherPlayer()) == 0) {
-			status += getPlayerName(actualPlayer) + TextContainer.MUST_PASS + "\t";
-		}
-		status += getPlayerName(checkAnotherPlayer()) + TextContainer.NEXT + "\n";
+		status += getPlayerName(actualPlayer) + TextContainer.NEXT + "\n";
 		statusLabel.setText(status);
 	}
 
-	public void isGameOver() {
+
+	public void GameOver() {
 		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
 			if (firstPlayer.getScore() > secondPlayer.getScore()) {
-				status = status + firstPlayer.getUserName() + TextContainer.WON;
+				status = firstPlayer.getUserName() + TextContainer.WON;
 			} else if (secondPlayer.getScore() > firstPlayer.getScore()) {
-				status = status + secondPlayer.getUserName() + TextContainer.WON;
+				status = secondPlayer.getUserName() + TextContainer.WON;
 			} else {
 				status = TextContainer.DRAW;
 			}
+			status += "\n" + firstPlayer.getUserName() + ": " + firstPlayer.getScore();
+			status += "\t" + secondPlayer.getUserName() + ": " + secondPlayer.getScore();
+			statusLabel.setText(status);
 		}
 	}
 
@@ -132,7 +140,8 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return count;
 	}
 
-	int turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Integer dx, Integer dy, Boolean reallyTurn) {
+	Integer turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Integer dx, Integer dy,
+			Boolean reallyTurn) {
 		Integer count = 0;
 		Integer x = cellPosition.getRowIndex(), y = cellPosition.getColumnIndex();
 		while (gameBoard.isValidCellPosition(new CellPosition(x + count * dx, y + count * dy))) {
@@ -164,14 +173,15 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		}
 		CellPosition cellPosition = new CellPosition(x, y);
 		Integer count = turnPieces(actualPlayer, cellPosition, false);
-		updateStatus();
 		if (count > 0) {
 			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
 
 			TimerUtility.runDelayed(500, () -> {
 				turnPieces(actualPlayer, cellPosition, true);
+
 				nextPlayer();
 				updateStatus();
+				GameOver();
 			});
 		}
 		return true;

@@ -10,6 +10,8 @@ import hu.unideb.inf.reversi.core.entity.PlayerResult;
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
 public interface PlayerResultRepository extends JpaRepository<PlayerResult, Long> {
+
+	public PlayerResult findByPlayerId(Long playerId) throws Exception;
 	
-//	public void updatePlayerResultByPlayerId(@Param("id") Long id) throws Exception;
+	public void deleteByPlayerId(Long playerId) throws Exception;
 }

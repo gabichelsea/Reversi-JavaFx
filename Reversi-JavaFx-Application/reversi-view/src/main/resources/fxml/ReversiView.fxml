@@ -11,7 +11,7 @@
 	<Label fx:id="statusLabel"></Label>
 	</top>
 	<center>
-		<ReversiGameBoard fx:id="gameBoard" columns="8" rows="8" onMouseClicked="#mouseClicked">
+		<ReversiGameBoard fx:id="gameBoard" columns="5" rows="5" onMouseClicked="#mouseClicked">
 		</ReversiGameBoard>
 	</center>
 	<bottom>

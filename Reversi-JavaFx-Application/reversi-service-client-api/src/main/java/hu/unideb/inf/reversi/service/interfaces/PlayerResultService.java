@@ -8,7 +8,9 @@ public interface PlayerResultService {
 	
 	public void add(PlayerResultVo playerResultVo) throws Exception;
 	
-	public List<PlayerResultVo> modifyByPlayerId() throws Exception;
+	public PlayerResultVo getByPlayerId(Long playerId) throws Exception;
 	
 	public List<PlayerResultVo> getAll() throws Exception;
+	
+	public void removeByPlayerId(Long playerId) throws Exception;
 }
