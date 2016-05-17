@@ -9,6 +9,7 @@ import hu.unideb.inf.reversi.service.board.ReversiGameBoard;
 import hu.unideb.inf.reversi.service.enums.ActualPlayer;
 import hu.unideb.inf.reversi.service.enums.CellType;
 import hu.unideb.inf.reversi.service.interfaces.PlayerResultService;
+import hu.unideb.inf.reversi.service.interfaces.ReversiGameManager;
 import hu.unideb.inf.reversi.service.interfaces.impl.ReversiGameManagerImpl;
 import hu.unideb.inf.reversi.service.utility.TimerUtility;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
@@ -35,7 +36,7 @@ public class ReversiViewController {
 
 	private PlayerVo firstPlayer;
 	private PlayerVo secondPlayer;
-	private ReversiGameManagerImpl gameManager;
+	private ReversiGameManager gameManager;
 
 	@FXML
 	protected void initialize() {
@@ -47,6 +48,7 @@ public class ReversiViewController {
 		initPlayers();
 		initReversiGameManager();
 		gameManager.newGame();
+		updateStatus();
 	}
 
 	private void registerResult(PlayerVo firstPlayer, PlayerVo secondPlayer) throws Exception {
@@ -89,8 +91,9 @@ public class ReversiViewController {
 	protected void newGameButtonAction() {
 		initReversiGameManager();
 		gameManager.newGame();
+		updateStatus();
 	}
-	
+
 	@FXML
 	protected void backToTheMainPage() {
 		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
@@ -100,6 +103,7 @@ public class ReversiViewController {
 	public void mouseClicked(MouseEvent mouseEvent) {
 		gameManager.mouseClicked(mouseEvent);
 		TimerUtility.runDelayed(500, () -> {
+			updateStatus();
 			tryToRegisterResult();
 		});
 	}
@@ -116,13 +120,17 @@ public class ReversiViewController {
 	}
 
 	private void initReversiGameManager() {
-		gameManager = new ReversiGameManagerImpl();
-		gameManager.setUp(firstPlayer, secondPlayer, gameBoard);
-		gameManager.setStatusLabel(statusLabel);
+		gameManager = new ReversiGameManagerImpl(firstPlayer, secondPlayer, gameBoard);
+		updateStatus();
 	}
 
 	private void initPlayers() {
 		firstPlayer = loginViewController.getFirstPlayer();
 		secondPlayer = loginViewController.getSecondPlayer();
+	}
+
+	private void updateStatus() {
+		gameManager.updateStatus();
+		statusLabel.setText(gameManager.getStatus());
 	}
 }

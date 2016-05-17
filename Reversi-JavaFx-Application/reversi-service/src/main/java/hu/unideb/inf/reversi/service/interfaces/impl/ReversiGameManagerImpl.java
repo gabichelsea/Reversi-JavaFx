@@ -1,7 +1,5 @@
 package hu.unideb.inf.reversi.service.interfaces.impl;
 
-import org.springframework.stereotype.Service;
-
 import hu.unideb.inf.reversi.service.board.ReversiGameBoard;
 import hu.unideb.inf.reversi.service.container.TextContainer;
 import hu.unideb.inf.reversi.service.enums.ActualPlayer;
@@ -12,10 +10,8 @@ import hu.unideb.inf.reversi.service.model.CellPosition;
 import hu.unideb.inf.reversi.service.utility.TimerUtility;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
-@Service
 public class ReversiGameManagerImpl implements ReversiGameManager {
 
 	private ReversiGameBoard gameBoard;
@@ -23,20 +19,15 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	private PlayerVo secondPlayer;
 	private ActualPlayer actualPlayer = ActualPlayer.FIRST_PLAYER;
 	private String status;
-	private Label statusLabel;
-
-	public ActualPlayer getActualPlayer() {
-		return actualPlayer;
-	}
-
-	public void setActualPlayer(ActualPlayer actualPlayer) {
-		this.actualPlayer = actualPlayer;
-	}
 
 	public ReversiGameManagerImpl() {
 	}
 
-	public void setUp(PlayerVo firstPlayer, PlayerVo secondPlayer, ReversiGameBoard gameBoard) {
+	public ReversiGameManagerImpl(PlayerVo firstPlayer, PlayerVo secondPlayer, ReversiGameBoard gameBoard) {
+		setUp(firstPlayer, secondPlayer, gameBoard);
+	}
+
+	private void setUp(PlayerVo firstPlayer, PlayerVo secondPlayer, ReversiGameBoard gameBoard) {
 		this.firstPlayer = firstPlayer;
 		this.secondPlayer = secondPlayer;
 		this.gameBoard = gameBoard;
@@ -63,10 +54,9 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 				+ secondPlayer.getScore() + "\n";
 
 		status += getPlayerName(actualPlayer) + TextContainer.NEXT + "\n";
-		statusLabel.setText(status);
 	}
 
-
+	@Override
 	public void gameOver() {
 		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
 			if (firstPlayer.getScore() > secondPlayer.getScore()) {
@@ -78,7 +68,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 			}
 			status += "\n" + firstPlayer.getUserName() + ": " + firstPlayer.getScore();
 			status += "\t" + secondPlayer.getUserName() + ": " + secondPlayer.getScore();
-			statusLabel.setText(status);
 		}
 	}
 
@@ -86,7 +75,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	public void nextTurn() {
 	}
 
-	public ActualPlayer checkAnotherPlayer() {
+	private ActualPlayer checkAnotherPlayer() {
 		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
 			return ActualPlayer.SECOND_PLAYER;
 		} else {
@@ -94,11 +83,11 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		}
 	}
 
-	String getPlayerName(ActualPlayer player) {
+	private String getPlayerName(ActualPlayer player) {
 		return player.equals(ActualPlayer.FIRST_PLAYER) ? firstPlayer.getUserName() : secondPlayer.getUserName();
 	}
 
-	public CellType getCellTypeByPlayer(ActualPlayer actualPlayer) {
+	private CellType getCellTypeByPlayer(ActualPlayer actualPlayer) {
 		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
 			return CellType.RED;
 		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
@@ -117,16 +106,18 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		}
 	}
 
-	Integer countPieces(ActualPlayer actualPlayer) {
+	@Override
+	public Integer countPieces(ActualPlayer actualPlayer) {
 		CellType cellType = getCellTypeByPlayer(actualPlayer);
 		return countCellsIf((cellPosition) -> cellType.equals(gameBoard.getCellByPosition(cellPosition)));
 	}
 
-	Integer countRemainingValidCells(ActualPlayer actualPlayer) {
+	@Override
+	public Integer countRemainingValidCells(ActualPlayer actualPlayer) {
 		return countCellsIf((cellPosition) -> turnPieces(actualPlayer, cellPosition, false) > 0);
 	}
 
-	Integer turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Boolean reallyTurn) {
+	private Integer turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Boolean reallyTurn) {
 		Integer count = 0, x = cellPosition.getRowIndex(), y = cellPosition.getColumnIndex();
 		if (gameBoard.getCellByPosition(new CellPosition(x, y)).equals(CellType.EMPTY) || reallyTurn) {
 			for (int dx = -1; dx <= 1; ++dx) {
@@ -140,7 +131,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return count;
 	}
 
-	Integer turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Integer dx, Integer dy,
+	private Integer turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Integer dx, Integer dy,
 			Boolean reallyTurn) {
 		Integer count = 0;
 		Integer x = cellPosition.getRowIndex(), y = cellPosition.getColumnIndex();
@@ -161,13 +152,14 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return 0;
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent mouseEvent) {
 		Node child = mouseEvent.getPickResult().getIntersectedNode();
 		gameBoard.applyCell((cellPosition) -> mouseClicked(cellPosition.getRowIndex(), cellPosition.getColumnIndex()),
 				child);
 	}
 
-	public boolean mouseClicked(Integer x, Integer y) {
+	private Boolean mouseClicked(Integer x, Integer y) {
 		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
 			return false;
 		}
@@ -176,7 +168,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		if (count > 0) {
 			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
 
-			TimerUtility.runDelayed(500, () -> {
+			TimerUtility.runDelayed(250, () -> {
 				turnPieces(actualPlayer, cellPosition, true);
 
 				nextPlayer();
@@ -201,43 +193,16 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return countCells((cellPosition) -> cellApplyService.applyCell(cellPosition) ? 1 : 0);
 	}
 
-	public ReversiGameBoard getGameBoard() {
-		return gameBoard;
-	}
-
 	public void setGameBoard(ReversiGameBoard gameBoard) {
 		this.gameBoard = gameBoard;
 	}
 
-	public PlayerVo getFirstPlayer() {
-		return firstPlayer;
-	}
-
-	public void setFirstPlayer(PlayerVo firstPlayer) {
-		this.firstPlayer = firstPlayer;
-	}
-
-	public PlayerVo getSecondPlayer() {
-		return secondPlayer;
-	}
-
-	public void setSecondPlayer(PlayerVo secondPlayer) {
-		this.secondPlayer = secondPlayer;
+	public ActualPlayer getActualPlayer() {
+		return actualPlayer;
 	}
 
 	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Label getStatusLabel() {
-		return statusLabel;
-	}
-
-	public void setStatusLabel(Label statusLabel) {
-		this.statusLabel = statusLabel;
-	}
 }

@@ -7,4 +7,6 @@ public interface BoardGameManager {
 	public void updateStatus();
 
 	public void nextTurn();
+	
+	public void gameOver();
 }
