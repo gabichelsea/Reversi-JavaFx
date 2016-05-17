@@ -9,8 +9,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * KépesJátékTábla amely tartalmazz egy képtárolót és egy képlistát ami mátrixot szimulál
- * @param <T> Amely egy általános típust jelöl
+ * KépesJátékTábla amely tartalmazz egy képtárolót és egy képlistát ami mátrixot
+ * szimulál
+ * 
+ * @param <T>
+ *            Amely egy általános típust jelöl
  */
 public abstract class ImageGameBoard<T> extends GameBoard<T> {
 
@@ -18,7 +21,7 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	 * Képlista, ami mátrixnak feletethető meg
 	 */
 	private List<ImageView> imageViewList;
-	
+
 	/**
 	 * Képtároló, amelyből a képlistánkat felépítjük
 	 */
@@ -40,18 +43,37 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 			imageViewList.add(null);
 		}
 	}
-	
+
+	/**
+	 * Lekérünk egy képNézetet és egy képet, majd a képNézetnek beállítjuk a
+	 * képet
+	 * 
+	 * @param imageKey
+	 *            Képkulcs, amely alapján lekérjük a képTárolóból az adott képet
+	 * @param cellPosition
+	 *            Cellapozició, amely alapján lekérjük a listánkból az adott
+	 *            pozicioju képnézetet
+	 */
 	public void setImage(T imageKey, CellPosition cellPosition) {
-		ImageView imageView = getImageView(imageKey, cellPosition);
+		ImageView imageView = getImageView(cellPosition);
 		Image image = getImageByKey(imageKey);
 		imageView.setImage(image);
 	}
 
-	private ImageView getImageView(T imageKey, CellPosition cellPosition) {
+	/**
+	 * Visszaadja a képNézetet, a cellapozició alapján
+	 * 
+	 * @param cellPosition
+	 *            Az a cellapozició, amelyik poziciónál lévő képNézetet
+	 *            szeretnénk lekérni
+	 * @return ImageView Képnézet, a cellapozicio alapján visszaadva, ha ez
+	 *         null, akkor egy új példányt adunk vissza
+	 */
+	private ImageView getImageView(CellPosition cellPosition) {
 		Integer x = cellPosition.getRowIndex();
 		Integer y = cellPosition.getColumnIndex();
 		Integer imagePosition = x * columns + y;
-		
+
 		ImageView imageView = imageViewList.get(imagePosition);
 		if (imageView == null) {
 			imageView = new ImageView();
@@ -60,14 +82,24 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 		return imageView;
 	}
 
+	/**
+	 * Visszaadja a képtároló objektumból a képkulcs-hoz tartozó objektumot
+	 * 
+	 * @param imageKey
+	 *            Képkulcs, amely alapján kérjük le a hozzá tartozó objekumot
+	 * @return Image Visszaadja a képet, amit a képkulcs alapján kérünk le
+	 */
 	private Image getImageByKey(T imageKey) {
 		return imageContainer.getImageMap().get(imageKey);
 	}
 
+	/**
+	 * Visszaadja a képtároló objektumot
+	 * 
+	 * @return imageContainer Visszaadja a képtároló objektumot
+	 */
 	public ImageContainer<T> getImageContainer() {
 		return imageContainer;
 	}
-	
-	
-	
+
 }

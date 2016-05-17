@@ -1,5 +1,8 @@
 package hu.unideb.inf.reversi.service.container;
 
+/**
+ * Szövegeket szolgáltató osztály
+ */
 public class TextContainer {
 
 	public static final String SUCCES_LOGIN = "Sikeres bejelentkezés";

@@ -59,7 +59,6 @@ public final class NavigationControllerUtility {
 	public static void loadRankingView(ActionEvent event) {
 		Parent parent = (Parent) loader.load("/fxml/RankingView.fxml");
 		Scene scene = new Scene(parent);
-		scene.getStylesheets().add(NavigationControllerUtility.class.getResource("/css/darkTheme.css").toExternalForm());
 		
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setTitle(TextContainer.RANKING_VIEW_TITLE);
