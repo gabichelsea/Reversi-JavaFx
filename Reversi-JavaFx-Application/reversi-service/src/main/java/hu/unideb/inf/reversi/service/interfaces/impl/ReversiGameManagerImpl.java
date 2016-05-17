@@ -57,7 +57,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	@Override
-	public void gameOver() {
+	public void updateGameOverStatus() {
 		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
 			if (firstPlayer.getScore() > secondPlayer.getScore()) {
 				status = firstPlayer.getUserName() + TextContainer.WON;
@@ -71,15 +71,13 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		}
 	}
 
-	@Override
-	public void nextTurn() {
-	}
-
-	private ActualPlayer checkAnotherPlayer() {
+	public ActualPlayer checkAnotherPlayer() {
 		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
 			return ActualPlayer.SECOND_PLAYER;
-		} else {
+		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)){
 			return ActualPlayer.FIRST_PLAYER;
+		} else {
+			return ActualPlayer.NOBODY;
 		}
 	}
 
@@ -94,15 +92,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 			return CellType.BLACK;
 		} else {
 			return CellType.EMPTY;
-		}
-	}
-
-	private void nextPlayer() {
-		if (countRemainingValidCells(checkAnotherPlayer()) > 0) {
-			actualPlayer = checkAnotherPlayer();
-		}
-		if (countRemainingValidCells(actualPlayer) == 0) {
-			actualPlayer = ActualPlayer.NOBODY;
 		}
 	}
 
@@ -171,9 +160,9 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 			TimerUtility.runDelayed(250, () -> {
 				turnPieces(actualPlayer, cellPosition, true);
 
-				nextPlayer();
+				nextTurn();
 				updateStatus();
-				gameOver();
+				updateGameOverStatus();
 			});
 		}
 		return true;
@@ -204,5 +193,33 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	public String getStatus() {
 		return status;
 	}
+
+	@Override
+	public void nextTurn() {
+		if (countRemainingValidCells(checkAnotherPlayer()) > 0) {
+			actualPlayer = checkAnotherPlayer();
+		}
+		if (countRemainingValidCells(actualPlayer) == 0) {
+			actualPlayer = ActualPlayer.NOBODY;
+		}
+	}
+
+	public PlayerVo getFirstPlayer() {
+		return firstPlayer;
+	}
+
+	public PlayerVo getSecondPlayer() {
+		return secondPlayer;
+	}
+
+
+	public ReversiGameBoard getGameBoard() {
+		return gameBoard;
+	}
+
+	public void setActualPlayer(ActualPlayer actualPlayer) {
+		this.actualPlayer = actualPlayer;
+	}
+
 
 }

@@ -8,5 +8,5 @@ public interface BoardGameManager {
 
 	public void nextTurn();
 	
-	public void gameOver();
+	public void updateGameOverStatus();
 }
