@@ -1,4 +1,4 @@
-package hu.unideb.inf.reversi.service.test;
+package hu.unideb.inf.reversi.service.test.interfaces;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
