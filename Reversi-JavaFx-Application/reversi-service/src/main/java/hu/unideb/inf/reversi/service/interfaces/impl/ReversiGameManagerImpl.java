@@ -182,9 +182,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return countCells((cellPosition) -> cellApplyService.applyCell(cellPosition) ? 1 : 0);
 	}
 
-	public void setGameBoard(ReversiGameBoard gameBoard) {
-		this.gameBoard = gameBoard;
-	}
 
 	public ActualPlayer getActualPlayer() {
 		return actualPlayer;

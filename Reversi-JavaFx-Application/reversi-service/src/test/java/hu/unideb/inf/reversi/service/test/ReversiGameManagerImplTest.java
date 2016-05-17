@@ -30,7 +30,7 @@ public class ReversiGameManagerImplTest {
 		gameBoard.setColumns(10);
 		gameManager = new ReversiGameManagerImpl(firstPlayer, secondPlayer, gameBoard);
 	}
-	
+
 	@Test
 	public void newGameTest() {
 		gameManager.newGame();
@@ -51,15 +51,15 @@ public class ReversiGameManagerImplTest {
 		gameManager.setActualPlayer(ActualPlayer.NOBODY);
 		Assert.assertEquals(ActualPlayer.NOBODY, gameManager.checkAnotherPlayer());
 	}
-	
+
 	@Test
-	public void nextTurnTest()  {
+	public void nextTurnTest() {
 		gameManager.newGame();
-		
+
 		gameManager.setActualPlayer(ActualPlayer.FIRST_PLAYER);
 		gameManager.nextTurn();
 		Assert.assertEquals(ActualPlayer.SECOND_PLAYER, gameManager.getActualPlayer());
-		
+
 		gameManager.setActualPlayer(ActualPlayer.SECOND_PLAYER);
 		gameManager.nextTurn();
 		Assert.assertEquals(ActualPlayer.FIRST_PLAYER, gameManager.getActualPlayer());
@@ -68,16 +68,15 @@ public class ReversiGameManagerImplTest {
 		gameManager.getGameBoard().setCell(new CellPosition(4, 5), CellType.EMPTY);
 		gameManager.getGameBoard().setCell(new CellPosition(5, 4), CellType.EMPTY);
 		gameManager.getGameBoard().setCell(new CellPosition(5, 5), CellType.EMPTY);
-		
+
 		gameManager.setActualPlayer(ActualPlayer.FIRST_PLAYER);
 		gameManager.nextTurn();
 		Assert.assertEquals(ActualPlayer.NOBODY, gameManager.getActualPlayer());
-		
+
 		gameManager.setActualPlayer(ActualPlayer.SECOND_PLAYER);
 		gameManager.nextTurn();
 		Assert.assertEquals(ActualPlayer.NOBODY, gameManager.getActualPlayer());
-		
-		
+
 	}
 
 	@Test
@@ -101,6 +100,5 @@ public class ReversiGameManagerImplTest {
 		gameManager.updateGameOverStatus();
 		Assert.assertEquals(TextContainer.DRAW + "\nfirstPlayer: 3\t" + "secondPlayer: 3", gameManager.getStatus());
 	}
-
 
 }
