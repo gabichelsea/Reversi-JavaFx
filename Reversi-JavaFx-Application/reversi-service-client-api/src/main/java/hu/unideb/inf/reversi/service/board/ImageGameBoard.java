@@ -55,9 +55,7 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	 *            pozicioju képnézetet
 	 */
 	public void setImage(T imageKey, CellPosition cellPosition) {
-		ImageView imageView = getImageView(cellPosition);
-		Image image = getImageByKey(imageKey);
-		imageView.setImage(image);
+		getImageView(cellPosition).setImage(getImageByKey(imageKey));
 	}
 
 	/**

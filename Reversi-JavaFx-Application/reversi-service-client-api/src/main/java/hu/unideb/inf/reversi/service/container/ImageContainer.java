@@ -62,7 +62,7 @@ public class ImageContainer<T> {
 
 	/**
 	 * Képeket tároló adatszerkezet visszaadása
-	 * @return Map<T, Image> képeket tároló adatszerkezet visszaadása
+	 * @return {@link Map} képeket tároló adatszerkezet visszaadása
 	 */
 	public Map<T, Image> getImageMap() {
 		return imageMap;

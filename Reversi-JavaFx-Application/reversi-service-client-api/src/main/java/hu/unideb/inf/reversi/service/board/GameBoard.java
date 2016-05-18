@@ -29,11 +29,11 @@ public abstract class GameBoard<T> extends GridPane {
 	}
 
 	/**
-	 * Lista, esetleg mátrix méretét meghatározó metódus, amit felül kell
-	 * definiálni a kiterjesztő osztályoknak
+	 * Lista méretét meghatározó metódus, amit felül kell
+	 * definiálni a kiterjesztő osztályoknak, a kettő szorzata lesz a lista mérete
 	 * 
-	 * @param columns
-	 * @param rows
+	 * @param columns A listánk méretét szolgáltató oszlopok száma
+	 * @param rows A listánk méretét szolgáltató sorok száma
 	 */
 	protected abstract void setDimensions(Integer columns, Integer rows);
 

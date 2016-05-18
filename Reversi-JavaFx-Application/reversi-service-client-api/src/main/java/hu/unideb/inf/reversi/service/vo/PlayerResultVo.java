@@ -2,91 +2,210 @@ package hu.unideb.inf.reversi.service.vo;
 
 import java.io.Serializable;
 
+/**
+ * Játékos eredményeit tároló osztály
+ */
 public class PlayerResultVo implements Serializable {
+	/**
+	 * Serialazációs szám azonosító
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Id, amely egyértelműen azonosítja az eredményt
+	 */
 	private Long id;
+
+	/**
+	 * Játékos objektum, amely tartalmazza, hogy kihez tartoznak az eredmények
+	 */
 	private PlayerVo player;
 
+	/**
+	 * Meccsek számát tároló változó
+	 */
 	private Integer numberOfMatches;
+
+	/**
+	 * Győzelmek számát tároló változó
+	 */
 	private Integer win;
+
+	/**
+	 * Döntetlenek számát tároló változó
+	 */
 	private Integer draw;
+
+	/**
+	 * Vereségek számát tároló változó
+	 */
 	private Integer lose;
+
+	/**
+	 * Megszerzett korongok számát tároló változó
+	 */
 	private Integer wonPieces;
+
+	/**
+	 * Elvesztett korong számát tároló változó
+	 */
 	private Integer lostPieces;
 
+	/**
+	 * Pamaméter nélküli üres konstruktor
+	 */
 	public PlayerResultVo() {
 	}
 
+	/**
+	 * Visszaadja az adott játékos eredményhez tartozó id-t
+	 * @return id Ami az adott eredményhez tartozik
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Beállítja az adott eredményhez tartozó id-t
+	 * @param id Az adott eredmény id-ja
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Adott játékos objektumot visszaadó metódus
+	 * 
+	 * @return player Az adott játékost adja vissza
+	 */
 	public PlayerVo getPlayer() {
 		return player;
 	}
 
+	/**
+	 * Adott játékos beállító metódus
+	 * 
+	 * @param player
+	 *            A paraméterként szerelő Játékos objektum, amelyet beállitunk
+	 *            majd
+	 */
 	public void setPlayer(PlayerVo player) {
 		this.player = player;
 	}
 
+	/**
+	 * Visszaadja a mérkőzések számát
+	 * 
+	 * @return numberOfMatches A mérkőzések számát adja vissza
+	 */
 	public Integer getNumberOfMatches() {
 		return numberOfMatches;
 	}
 
+	/**
+	 * Beállítja a mérkőzések számát
+	 * 
+	 * @param numberOfMatches
+	 *            Beállítja a mérkőzések számát a paraméterként szereplő értékre
+	 */
 	public void setNumberOfMatches(Integer numberOfMatches) {
 		this.numberOfMatches = numberOfMatches;
 	}
 
+	/**
+	 * Visszaadja a győzelmek számát
+	 * 
+	 * @return win A győzelmek számát adja vissza
+	 */
 	public Integer getWin() {
 		return win;
 	}
 
+	/**
+	 * Beállítja a győzelmek számát
+	 * 
+	 * @param win
+	 *            Beállítja a győzelmek számát a paraméterként szereplőre
+	 */
 	public void setWin(Integer win) {
 		this.win = win;
 	}
 
+	/**
+	 * Visszaadja a döntetlenek számát
+	 * 
+	 * @return draw A döntetlenek számát adja vissza
+	 */
 	public Integer getDraw() {
 		return draw;
 	}
 
+	/**
+	 * Beállítja a döntetlenek számát
+	 * 
+	 * @param draw
+	 *            Beállítja a döntetlenek számát a paraméterként szereplőre
+	 */
 	public void setDraw(Integer draw) {
 		this.draw = draw;
 	}
 
+	/**
+	 * Visszaadja a vereségek számát
+	 * 
+	 * @return lose A vereségek számát adja vissza
+	 */
 	public Integer getLose() {
 		return lose;
 	}
 
+	/**
+	 * Beállítja a vereségek számát
+	 * 
+	 * @param lose
+	 *            A vereségek számát állítja be, a paraméterként szereplő
+	 *            értékre
+	 */
 	public void setLose(Integer lose) {
 		this.lose = lose;
 	}
 
+	/**
+	 * Visszaadja a megszerzett korongok számát
+	 * 
+	 * @return wonPieces A megszerzett korongok számát adja vissza
+	 */
 	public Integer getWonPieces() {
 		return wonPieces;
 	}
 
+	/**
+	 * Beállítja a megszerzett pontokat a paraméterként szereplőre
+	 * 
+	 * @param wonPieces
+	 *            A megszerzett pontokat állitja be a paraméterként szereplőre
+	 */
 	public void setWonPieces(Integer wonPieces) {
 		this.wonPieces = wonPieces;
 	}
 
+	/**
+	 * Visszaadja az elvesztett korongok számát
+	 * 
+	 * @return lostPieces Az elvesztett korongok számát adja vissza
+	 */
 	public Integer getLostPieces() {
 		return lostPieces;
 	}
 
+	/**
+	 * Beállítja az elvesztett korongok számát a paraméterként szereplőre
+	 * 
+	 * @param lostPieces
+	 *            Beállítja az elvesztett korongok számát a paraméterként lévőre
+	 */
 	public void setLostPieces(Integer lostPieces) {
 		this.lostPieces = lostPieces;
-	}
-
-	@Override
-	public String toString() {
-		return "PlayerResultVo [id=" + id + ", player=" + player + ", numberOfMatches=" + numberOfMatches + ", win="
-				+ win + ", draw=" + draw + ", lose=" + lose + ", wonPieces=" + wonPieces + ", lostPieces=" + lostPieces
-				+ "]";
 	}
 
 }
