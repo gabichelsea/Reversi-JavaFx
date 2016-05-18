@@ -14,6 +14,9 @@ import hu.unideb.inf.reversi.service.interfaces.PlayerResultService;
 import hu.unideb.inf.reversi.service.mapper.PlayerResultMapper;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 
+/**
+ * Adott játékoshoz tartozó eredmények müveleteiért felelős osztály
+ */
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerResultServiceImpl implements PlayerResultService {
@@ -22,6 +25,11 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 	@Autowired
 	PlayerResultRepository playerResultRepository;
 
+	/**
+	 * Hozzáadjuk a paraméterként szereplő Játékos Eredmény Érték objektumot az adatbázisban szereplő táblánkhoz
+	 * @param playerResultVo Játékos Eredmény Érték objektum, amelyet hozzáfogunk adni az adatbázishoz
+	 * @throws Exception Kivétel lép fel, amennyiben bármelyik validációs megszorítás sérül
+	 */
 	@Override
 	public void add(PlayerResultVo playerResultVo) throws Exception {
 		try {
@@ -32,16 +40,32 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 		}
 	}
 
+	/**
+	 * Visszaadja a paraméterként szereplő játékosId-hoz tartozó eredményt
+	 * @param playerId A paraméterként szereplő játékosId alapján kérjük le a hozzá tartozó eredményeket
+	 * @return Visszaadjuk a az adott játékosId-hoz tartozó eredményt
+	 * @throws Exception Általános kivétel dobása
+	 */
 	@Override
 	public PlayerResultVo getByPlayerId(Long playerId) throws Exception {
 		return PlayerResultMapper.toVo(playerResultRepository.findByPlayerId(playerId));
 	}
 
+	/**
+	 * Visszadja az összes játékoshoz tartozó eredményeket
+	 * @return Az összes játékoshoz tartozó eredmény
+	 * @throws Exception Általános kivétel dobása
+	 */
 	@Override
 	public List<PlayerResultVo> getAll() throws Exception {
 		return PlayerResultMapper.toVo(playerResultRepository.findAll());
 	}
 
+	/**
+	 * Kitöröljük a paraméterként szereplő játékosId-hoz tartozó eredményt
+	 * @param playerId A paraméterként szereplő játékosId alapján töröljük ki az eredményt
+	 * @throws Exception Általános kivétel dobása
+	 */
 	@Override
 	public void removeByPlayerId(Long playerId) throws Exception {
 		playerResultRepository.deleteByPlayerId(playerId);

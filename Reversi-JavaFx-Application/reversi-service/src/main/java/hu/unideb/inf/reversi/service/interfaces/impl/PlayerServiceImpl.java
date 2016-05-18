@@ -12,6 +12,9 @@ import hu.unideb.inf.reversi.service.interfaces.PlayerService;
 import hu.unideb.inf.reversi.service.mapper.PlayerMapper;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
 
+/**
+ * Játékos szolgáltatásokat tartalmazó interfész
+ */
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerServiceImpl implements PlayerService {
@@ -20,11 +23,22 @@ public class PlayerServiceImpl implements PlayerService {
 	@Autowired
 	PlayerRepository playerRepository;
 
+	/**
+	 * Visszaadjuk az adott felhasználónévvel rendelkező játékost
+	 * @param userName Az adott felhasználónév, amely alapján keressük a játékost
+	 * @return Visszaadjuk az adott felhasznlónévvel rendelekező Játékost
+	 * @throws Exception Általános kivétel dobása
+	 */
 	@Override
 	public PlayerVo getByUserName(String userName) throws Exception {
 		return PlayerMapper.toVo(playerRepository.findByUserName(userName));
 	}
 
+	/**
+	 * A paraméterként szereplő felhasználó hozzáadását végző metódus
+	 * @param playerVo Az a játékos, akit hozzá szeretnénk adni az adatbázishoz
+	 * @throws Exception Általános kivétel dobása
+	 */
 	@Override
 	public void add(PlayerVo playerVo) throws Exception {
 		try {
