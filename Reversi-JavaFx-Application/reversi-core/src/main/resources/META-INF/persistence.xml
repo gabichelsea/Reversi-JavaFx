@@ -6,30 +6,25 @@
 	version="2.0">
 
 	<persistence-unit name="hu.unideb.inf.reversi">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>hu.unideb.inf.reversi.core.entity.BaseEntity</class>
 		<class>hu.unideb.inf.reversi.core.entity.Player</class>
 		<class>hu.unideb.inf.reversi.core.entity.PlayerResult</class>
 
+
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		
-		
+
 		<properties>
-
 			<property name="hibernate.archive.autodetection" value="class, hbm" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
-			<property name="hibernate.connection.username" value="postgres" />
-			<property name="hibernate.connection.password" value="klose12" />
-			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/Reversi" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.default_schema" value="public" />
-			<property name="hibernate.hbm2ddl.import_files" value="create.sql" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:h2:./target/Reversidb" />
+			<property name="hibernate.connection.user" value="sa" />
+
 			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
-
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
 		</properties>
-
 	</persistence-unit>
 </persistence>
