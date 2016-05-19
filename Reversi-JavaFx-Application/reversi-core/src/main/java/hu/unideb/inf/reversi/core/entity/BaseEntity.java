@@ -8,40 +8,44 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
- * Főentitás amely egy absztrakt osztály, amely az id-t szolgáltatja az őt
+ * Főentitás amely egy absztrakt osztály, mely az azonosítót szolgáltatja az őt
  * kiterjesztő osztályok számára.
  */
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 	/**
-	 * Serialazációs szám azonosító
+	 * Serialazációs szám azonosító.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Id amely egyértelműen azonosítja majd a leszármaztatott objektumokat
+	 * Azonosító amely egyértelműen azonosítja majd a leszármaztatottakat.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	/**
-	 * Alapértelmezett paraméter nélküli konstruktor a {@link Serializable} interfész implementálása jóvoltából
+	 * Alapértelmezett paraméter nélküli konstruktor, ami a {@link Serializable}
+	 * interfész implementálása miatt ajánlott.
 	 */
 	public BaseEntity() {
 	}
 
 	/**
-	 * Visszaadja az objektum id-ját 
-	 * @return id Az adott objektumhoz tartozó id
+	 * Visszaadja az azonosítót.
+	 * 
+	 * @return Az azonosító.
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Beállítja az objektum id-ját a paraméterben lévőre
-	 * @param id A paraméterben szereplő id
+	 * Beállítja az azonosítót.
+	 * 
+	 * @param id
+	 *            A beállítandó azonosító.
 	 */
 	public void setId(Long id) {
 		this.id = id;

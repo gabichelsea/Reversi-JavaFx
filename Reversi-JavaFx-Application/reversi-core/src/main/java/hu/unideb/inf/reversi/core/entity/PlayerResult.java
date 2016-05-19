@@ -1,5 +1,7 @@
 package hu.unideb.inf.reversi.core.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * Játékos eredményeit tároló osztály
+ * Egy játékoshoz tartozó eredményeket reprezentáló osztály.
  */
 @Entity
 @Table(name = "player_result")
@@ -18,7 +20,7 @@ public class PlayerResult extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Játékos objektum, amely tartalmazza, hogy kihez tartoznak az eredmények
+	 * Játékos, ő hozzá fognak tartozni az osztályban lévő eredmények.
 	 */
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "player_id")
@@ -26,44 +28,44 @@ public class PlayerResult extends BaseEntity {
 	private Player player;
 
 	/**
-	 * Meccsek számát tároló változó
+	 * A meccsek száma.
 	 */
 	@Column(name = "number_of_matches")
 	private Integer numberOfMatches;
 
 	/**
-	 * Győzelmek számát tároló változó
+	 * A győzelmek száma.
 	 */
 	@Column(name = "win")
 	private Integer win;
 
 	/**
-	 * Döntetlenek számát tároló változó
+	 * A döntetlenek száma.
 	 */
 	@Column(name = "draw")
 	private Integer draw;
 
 	/**
-	 * Vereségek számát tároló változó
+	 * A vereségek száma.
 	 */
 	@Column(name = "lose")
 	private Integer lose;
 
 	/**
-	 * Megszerzett korongok számát tároló változó
+	 * A megszerzett korongok száma.
 	 */
 	@Column(name = "won_pieces")
 	private Integer wonPieces;
 
 	/**
-	 * Elvesztett korong számát tároló változó
+	 * Az elvesztett korongok száma.
 	 */
 	@Column(name = "lost_pieces")
 	private Integer lostPieces;
 
 	/**
-	 * Adatbázisban 0 értékkel kerülnek be az alábbi értékek, a null értékek
-	 * helyett
+	 * Az adatbázisba 0 értékkel kerülnek be az alábbi értékek, a null értékek
+	 * helyett.
 	 */
 	@PrePersist
 	private void init() {
@@ -76,141 +78,140 @@ public class PlayerResult extends BaseEntity {
 	}
 
 	/**
-	 * Pamaméter nélküli üres konstruktor
+	 * Pamaméter nélküli üres konstruktor, ami a {@link Serializable} interfész
+	 * implementálása miatt ajánlott.
 	 */
 	public PlayerResult() {
 	}
 
 	/**
-	 * Adott játékos objektumot visszaadó metódus
+	 * Visszaadja a játékost.
 	 * 
-	 * @return player Az adott játékost adja vissza
+	 * @return A játékos.
 	 */
 	public Player getPlayer() {
 		return player;
 	}
 
 	/**
-	 * Adott játékos beállító metódus
+	 * Beállítja a játékost.
 	 * 
 	 * @param player
-	 *            A paraméterként szerelő Játékos objektum, amelyet beállitunk
-	 *            majd
+	 *            A beállítandó paraméter.
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 
 	/**
-	 * Visszaadja a mérkőzések számát
+	 * Visszaadja a mérkőzések számát.
 	 * 
-	 * @return numberOfMatches A mérkőzések számát adja vissza
+	 * @return A mérkőzések száma.
 	 */
 	public Integer getNumberOfMatches() {
 		return numberOfMatches;
 	}
 
 	/**
-	 * Beállítja a mérkőzések számát
+	 * Beállítja a mérkőzések számát.
 	 * 
 	 * @param numberOfMatches
-	 *            Beállítja a mérkőzések számát a paraméterként szereplő értékre
+	 *            A beállítandó paraméter.
 	 */
 	public void setNumberOfMatches(Integer numberOfMatches) {
 		this.numberOfMatches = numberOfMatches;
 	}
 
 	/**
-	 * Visszaadja a győzelmek számát
+	 * Visszaadja a győzelmek számát.
 	 * 
-	 * @return win A győzelmek számát adja vissza
+	 * @return A győzelmek száma.
 	 */
 	public Integer getWin() {
 		return win;
 	}
 
 	/**
-	 * Beállítja a győzelmek számát
+	 * Beállítja a győzelmek számát.
 	 * 
 	 * @param win
-	 *            Beállítja a győzelmek számát a paraméterként szereplőre
+	 *            A beállítandó paraméter.
 	 */
 	public void setWin(Integer win) {
 		this.win = win;
 	}
 
 	/**
-	 * Visszaadja a döntetlenek számát
+	 * Visszaadja a döntetlenek számát.
 	 * 
-	 * @return draw A döntetlenek számát adja vissza
+	 * @return A döntetlenek száma.
 	 */
 	public Integer getDraw() {
 		return draw;
 	}
 
 	/**
-	 * Beállítja a döntetlenek számát
+	 * Beállítja a döntetlenek számát.
 	 * 
 	 * @param draw
-	 *            Beállítja a döntetlenek számát a paraméterként szereplőre
+	 *            A beállítandó paraméter.
 	 */
 	public void setDraw(Integer draw) {
 		this.draw = draw;
 	}
 
 	/**
-	 * Visszaadja a vereségek számát
+	 * Visszaadja a vereségek számát.
 	 * 
-	 * @return lose A vereségek számát adja vissza
+	 * @return A vereségek száma.
 	 */
 	public Integer getLose() {
 		return lose;
 	}
 
 	/**
-	 * Beállítja a vereségek számát
+	 * Beállítja a vereségek számát.
 	 * 
 	 * @param lose
-	 *            A vereségek számát állítja be, a paraméterként szereplő
-	 *            értékre
+	 *            A beállítandó paraméter.
 	 */
 	public void setLose(Integer lose) {
 		this.lose = lose;
 	}
 
 	/**
-	 * Visszaadja a megszerzett korongok számát
+	 * Visszaadja a megszerzett korongok számát.
 	 * 
-	 * @return wonPieces A megszerzett korongok számát adja vissza
+	 * @return A megszerzett korongok száma.
 	 */
 	public Integer getWonPieces() {
 		return wonPieces;
 	}
 
 	/**
-	 * Beállítja a megszerzett pontokat a paraméterként szereplőre
+	 * Beállítja a megszerzett pontokat.
 	 * 
 	 * @param wonPieces
-	 *            A megszerzett pontokat állitja be a paraméterként szereplőre
+	 *            A beállítandó paraméter.
 	 */
 	public void setWonPieces(Integer wonPieces) {
 		this.wonPieces = wonPieces;
 	}
 
 	/**
-	 * Visszaadja az elvesztett korongok számát
+	 * Visszaadja az elvesztett korongok számát.
 	 * 
-	 * @return lostPieces Az elvesztett korongok számát adja vissza
+	 * @return Az elvesztett korongok száma.
 	 */
 	public Integer getLostPieces() {
 		return lostPieces;
 	}
 
 	/**
-	 * Beállítja az elvesztett korongok számát a paraméterként szereplőre
+	 * Beállítja az elvesztett korongok számát.
 	 * 
 	 * @param lostPieces
-	 *            Beállítja az elvesztett korongok számát a paraméterként lévőre
+	 *            A beállítandó paraméter.
 	 */
 	public void setLostPieces(Integer lostPieces) {
 		this.lostPieces = lostPieces;

@@ -8,72 +8,69 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 /**
- * Játékos osztály, amely tartalmazza egy adott játékos felhasználónevét és
- * jelszavát
+ * Játékos amely tartalmazza egy adott játékos felhasználónevét és jelszavát.
  */
 @Entity
 @Table(name = "player")
 public class Player extends BaseEntity {
 	/**
-	 * Serialazációs szám azonosító
+	 * Serialazációs szám azonosító.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Felhasználónév, amelynek egyedinek kell lennie és legalább 3 karaktert
-	 * kell tartalmaznia
+	 * kell tartalmaznia.
 	 */
 	@Column(name = "user_name", unique = true)
 	@Size(min = 3)
 	private String userName;
 
 	/**
-	 * Jelszó, amely legalább 5 karakterből kell hogy álljon
+	 * Jelszó, amely kötelezően legalább 5 karakterből áll.
 	 */
 	@Column(name = "password", unique = false)
 	@Size(min = 5)
 	private String password;
 
 	/**
-	 * Alapértelmezett paraméter nélküli konstruktor, ami a {@link Serializable}
-	 * interfész miatt ajánlott
+	 * Alapértelmezett paraméter nélküli konstruktor, a {@link Serializable}
+	 * interfész miatt ajánlott hogy legyen.
 	 */
 	public Player() {
 	}
 
 	/**
-	 * Visszaadja az adott Játékos objektum felhasználónevét
+	 * Visszaadja a játékos felhasználónevét.
 	 * 
-	 * @return userName A Player objektumhoz tartozó felhasználónév
+	 * @return A játékos felhasználóneve.
 	 */
 	public String getUserName() {
 		return userName;
 	}
 
 	/**
-	 * Beállítja az adott Játékos objektum felhasználónevét
+	 * Beállítja a játékos felhasználónevét.
 	 * 
-	 * @param userName
-	 *            A paraméterben szereplő felhasználónév
+	 * @param userName A beállítandó felhasználónév.
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
 	/**
-	 * Visszaadja az adott Játékos objektum jelszavát
+	 * Visszaadja a játékos jelszavát.
 	 * 
-	 * @return password A Player objektumhoz tartozó jelszó
+	 * @return A játékos jelszava.
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * Beállítja az adott Játékos objektum jelszavát
+	 * Beállítja a játékos jelszavát.
 	 * 
-	 * @param password
-	 *            A paraméterben szereplő jelszó
+	 * @param password A beállítandó jelszó.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
