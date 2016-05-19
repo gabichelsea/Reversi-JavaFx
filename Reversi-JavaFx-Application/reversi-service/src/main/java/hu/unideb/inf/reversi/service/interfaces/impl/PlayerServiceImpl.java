@@ -24,10 +24,7 @@ public class PlayerServiceImpl implements PlayerService {
 	PlayerRepository playerRepository;
 
 	/**
-	 * Visszaadjuk az adott felhasználónévvel rendelkező játékost
-	 * @param userName Az adott felhasználónév, amely alapján keressük a játékost
-	 * @return Visszaadjuk az adott felhasznlónévvel rendelekező Játékost
-	 * @throws Exception Általános kivétel dobása
+	 * {@inheritDoc}
 	 */
 	@Override
 	public PlayerVo getByUserName(String userName) throws Exception {
@@ -35,9 +32,7 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	/**
-	 * A paraméterként szereplő felhasználó hozzáadását végző metódus
-	 * @param playerVo Az a játékos, akit hozzá szeretnénk adni az adatbázishoz
-	 * @throws Exception Általános kivétel dobása
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void add(PlayerVo playerVo) throws Exception {

@@ -26,9 +26,7 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 	PlayerResultRepository playerResultRepository;
 
 	/**
-	 * Hozzáadjuk a paraméterként szereplő Játékos Eredmény Érték objektumot az adatbázisban szereplő táblánkhoz
-	 * @param playerResultVo Játékos Eredmény Érték objektum, amelyet hozzáfogunk adni az adatbázishoz
-	 * @throws Exception Kivétel lép fel, amennyiben bármelyik validációs megszorítás sérül
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void add(PlayerResultVo playerResultVo) throws Exception {
@@ -41,10 +39,7 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 	}
 
 	/**
-	 * Visszaadja a paraméterként szereplő játékosId-hoz tartozó eredményt
-	 * @param playerId A paraméterként szereplő játékosId alapján kérjük le a hozzá tartozó eredményeket
-	 * @return Visszaadjuk a az adott játékosId-hoz tartozó eredményt
-	 * @throws Exception Általános kivétel dobása
+	 * {@inheritDoc}
 	 */
 	@Override
 	public PlayerResultVo getByPlayerId(Long playerId) throws Exception {
@@ -52,9 +47,7 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 	}
 
 	/**
-	 * Visszadja az összes játékoshoz tartozó eredményeket
-	 * @return Az összes játékoshoz tartozó eredmény
-	 * @throws Exception Általános kivétel dobása
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<PlayerResultVo> getAll() throws Exception {
@@ -62,13 +55,24 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 	}
 
 	/**
-	 * Kitöröljük a paraméterként szereplő játékosId-hoz tartozó eredményt
-	 * @param playerId A paraméterként szereplő játékosId alapján töröljük ki az eredményt
-	 * @throws Exception Általános kivétel dobása
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void removeByPlayerId(Long playerId) throws Exception {
 		playerResultRepository.deleteByPlayerId(playerId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void modify(PlayerResultVo playerResultVo) throws Exception {
+		try {
+			playerResultRepository.save(PlayerResultMapper.toDto(playerResultVo));
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			throw e;
+		}
 	}
 
 }

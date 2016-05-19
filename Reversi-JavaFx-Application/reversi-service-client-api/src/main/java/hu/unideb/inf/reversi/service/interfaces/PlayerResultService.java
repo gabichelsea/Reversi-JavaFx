@@ -37,4 +37,6 @@ public interface PlayerResultService {
 	 * @throws Exception Általános kivétel dobása
 	 */
 	public void removeByPlayerId(Long playerId) throws Exception;
+	
+	public void modify(PlayerResultVo playerResultVo) throws Exception;
 }
