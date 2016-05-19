@@ -5,78 +5,79 @@ import hu.unideb.inf.reversi.service.model.CellPosition;
 import javafx.scene.Node;
 
 /**
- * Cella szolgáltatások interfész
+ * Cellákhoz kapcsolódó legfontosabb müveletek.
  */
 public interface CellService {
 
 	/**
-	 * Megvizsgáljuk hogy a paraméterként szereplő cella érvényes-e
+	 * Megvizsgáljuk hogy a paraméterként szereplő cella érvényes-e.
 	 * 
 	 * @param cellPosition
-	 *            Cell pozíció amelyre vizsgáljuk hogy érvényes cella-e
-	 * @return {@link Boolean} Visszaadja hogy érvényes-e a cella
+	 *            A vizsgálandó cella pozíció.
+	 * @return Érvényes-e a cella
 	 */
 	public Boolean isValidCellPosition(CellPosition cellPosition);
 
 	/**
-	 * Beállítjuk az értéket, az adott cella pozícióra
+	 * Beállítjuk az adott cella pozícióra az adott cella értéket.
 	 * 
 	 * @param cellPosition
-	 *            Cellapozíció, amelyre befogjuk állítani az értéket
+	 *            A beállítandó cella helyzete.
 	 * @param value
-	 *            Érték, amelyet beállitunk az adott cella pozícióra
+	 *            A beállítandó cella "értéke".
 	 */
 	public void setCell(CellPosition cellPosition, CellType value);
 
 	/**
-	 * Cella frissítése cella pozíció által
+	 * Cella frissítése cella pozíció által.
 	 * 
 	 * @param cellPosition
-	 *            Cellapozíció, amely alapján frissítsük a cellát
+	 *            A frissítendő cella pozíciója.
 	 */
 	public void updateCell(CellPosition cellPosition);
 
 	/**
-	 * Cellák kitöltése érték alapján
+	 * Cellák kitöltése az adott érték alapján.
 	 * 
 	 * @param value
-	 *            Érték, amellyel kitöltjük a cellákat
+	 *            A cellákat kitöltendő érték.
 	 */
 	public void fillCells(CellType value);
 
 	/**
-	 * Összes rács kitöltése
+	 * Az összes rács kitöltése.
 	 * 
 	 * @param value
-	 *            Érték, amellyel kitöltjük az összes rácsot
+	 *            Azon érték, amellyel kitöltjük az összes rácsot.
 	 */
 	public void fillAllGrid(CellType value);
 
 	/**
-	 * Visszaadja az adott cellát, cella pozíció által
+	 * Visszaadja az adott cellát, a cella pozíció által.
 	 * 
 	 * @param cellPosition
-	 *            Cella pozíció, amely alapján adjuk vissza a cellát
-	 * @return {@link CellType} Cellatípus, amelyet visszaadunk cella pozíció
-	 *         által
+	 *            Az a cella pozíció, amelyhez tartozó cellát visszaadjuk.
+	 * @return A cellapozícióhoz tartozó cella.
 	 */
 	public CellType getCellByPosition(CellPosition cellPosition);
 
 	/**
-	 * Visszaadja a cella helyzetét 1 dimenziós tömbben nézve
+	 * Visszaadja a cella helyzetét 1 dimenziós tömbben számítva.
 	 * 
 	 * @param cellPosition
-	 *            Cellapozíció, amelyből egy értéket állítunk elő, ami ugyanazon
-	 *            cella lesz, csak 1 dimenziós eléréssel
-	 * @return Visszadja a cella helyzetét 1 dimenziós tömbben nézve
+	 *            A cella pozíciója két dimenziósan modellezve.
+	 * @return Visszadja a cella helyzetét egy dimenziósan modellezve.
 	 */
 	public Integer getCellPositionNumber(CellPosition cellPosition);
 
 	/**
-	 * Cella elfogadásáért felelős metódus
-	 * @param cellApplyService Cella alkalmazás szolgáltatás
-	 * @param child Csomópont gyermek
-	 * @return Visszaadjuk az átvett cellát
+	 * Cella elfogadásáért felelős metódus.
+	 * 
+	 * @param cellApplyService
+	 *            A cella elfogadását definiáló interfész.
+	 * @param child
+	 *            Gyermek csomópont.
+	 * @return Visszaadjuk az elfogadott cellát.
 	 */
 	public <T> T applyCell(CellApplyService<T> cellApplyService, Node child);
 }

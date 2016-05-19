@@ -11,17 +11,18 @@ import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 /**
- * A tényleges, Reversi játéktábla
+ * Reversi játéktábla, amely képekből épül fel, illetve számos cellához, amikből
+ * egyébként felépül a játéktáblánk, kapcsolódó műveletet implementál.
  */
 public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellService {
 
 	/**
-	 * A cellákat tartalmazó listánk
+	 * A cellákat tartalmazó lista.
 	 */
 	private List<CellType> cellList = new ArrayList<CellType>();
 
 	/**
-	 * Paraméter nélküli üres konstruktor
+	 * Paraméter nélküli üres konstruktor.
 	 */
 	public ReversiGameBoard() {
 	}
@@ -76,6 +77,14 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void fillAllGrid(CellType value) {
+		fillCells(value);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public CellType getCellByPosition(CellPosition cellPosition) {
 		if (isValidCellPosition(cellPosition)) {
 			Integer position = getCellPositionNumber(cellPosition);
@@ -92,14 +101,6 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	@Override
 	public Integer getCellPositionNumber(CellPosition cellPosition) {
 		return cellPosition.getRowIndex() * columns + cellPosition.getColumnIndex();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void fillAllGrid(CellType value) {
-		fillCells(value);
 	}
 
 	/**

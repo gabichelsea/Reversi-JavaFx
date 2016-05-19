@@ -1,109 +1,114 @@
 package hu.unideb.inf.reversi.service.vo;
 
 import java.io.Serializable;
+
 /**
- * Játékos osztály, amely tartalmazza egy adott játékos felhasználónevét és
- * jelszavát
+ * Játékos amely tartalmazza egy adott játékos felhasználónevét és jelszavát,
+ * illetve még az aktuális játék során lévő megszerzett pontok számát.
  */
 public class PlayerVo implements Serializable {
 	/**
-	 * Serialazációs szám azonosító
+	 * Serialazációs szám azonosító.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Id, amely egyértelműen azonosítja a játékost, a felhasználóneve mellett
+	 * Azonosító, amely egyértelműen azonosítja a játékost, a felhasználóneve mellett.
 	 */
 	private Long id;
-	
+
 	/**
-	 * Felhasználónév, amelynek egyedinek kell lennie és legalább 3 karaktert
-	 * kell tartalmaznia
+	 * Felhasználónév.
 	 */
 	private String userName;
-	
+
 	/**
-	 * Jelszó, amely legalább 5 karakterből kell hogy álljon
+	 * Jelszó.
 	 */
 	private String password;
-	
+
 	/**
-	 * Az adott játékoshoz tartozó pontokat tárolja, amit az adott meccsen elér
+	 * A játékoshoz tartozó pontokat tárolja, amit az adott meccsen elért.
 	 */
 	private Integer score;
 
 	/**
 	 * Alapértelmezett paraméter nélküli konstruktor, ami a {@link Serializable}
-	 * interfész miatt ajánlott
+	 * interfész miatt ajánlott.
 	 */
 	public PlayerVo() {
 	}
 
 	/**
-	 * Visszaadja az adott játékoshoz tartozó id-t
-	 * @return id Az adott játékoshoz tartozó id-t adja vissza
+	 * Visszaadja a játékoshoz tartozó azonosítót.
+	 * 
+	 * @return A játékos azonosítója.
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Az adott játékoshoz tartozó id-t állítja be
-	 * @param id Az adott játékoshoz tartozó id-t állitja be
+	 * A játékoshoz tartozó azonosítót állítja be.
+	 * 
+	 * @param id A beállítandó azonosító.
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * Visszaadja az adott Játékos objektum felhasználónevét
+	 * Visszaadja a játékos felhasználónevét.
 	 * 
-	 * @return userName A Player objektumhoz tartozó felhasználónév
+	 * @return A játékos felhasználóneve.
 	 */
 	public String getUserName() {
 		return userName;
 	}
 
 	/**
-	 * Beállítja az adott Játékos objektum felhasználónevét
+	 * Beállítja a játékos felhasználónevét.
 	 * 
 	 * @param userName
-	 *            A paraméterben szereplő felhasználónév
+	 *            A beállítandó felhasználónév.
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
 	/**
-	 * Visszaadja az adott Játékos objektum jelszavát
+	 * Visszaadja a játékos jelszavát.
 	 * 
-	 * @return password A Player objektumhoz tartozó jelszó
+	 * @return A játékos jelszava.
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * Beállítja az adott Játékos objektum jelszavát
+	 * Beállítja a játékos jelszavát.
 	 * 
 	 * @param password
-	 *            A paraméterben szereplő jelszó
+	 *            A beállítandó jelszó.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * A mérkőzés közben lévő játákos pontok tárolására szolgál
-	 * @return score Az adott játékos adott mérkőzésén lévő pontjait adja vissza
+	 * Visszaadja a játékos adott mérkőzésen megszerzett pontjait.
+	 * 
+	 * @return A játékos mérkőzésén lévő megszerzett pontjait adja vissza.
 	 */
 	public Integer getScore() {
 		return score;
 	}
 
 	/**
-	 * Beállítja az adott játékoshoz tartozó pontokat
-	 * @param score Az adott játékos pontjait beállításra kitüzött változó
+	 * Beállítja a játékoshoz tartozó megszerzett pontokat.
+	 * 
+	 * @param score
+	 *            A beállítandó megszerzett pontok.
 	 */
 	public void setScore(Integer score) {
 		this.score = score;

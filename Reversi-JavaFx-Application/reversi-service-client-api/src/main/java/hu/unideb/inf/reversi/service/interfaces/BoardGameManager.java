@@ -1,28 +1,27 @@
 package hu.unideb.inf.reversi.service.interfaces;
 
 /**
- * TáblaJátékMenedzser, amely definiál pár fontos müveletet a táblajátékok
- * számára
+ * Általános funkciókat definiáló interfész.
  */
 public interface BoardGameManager {
 
 	/**
-	 * Új játék
+	 * Új játék.
 	 */
 	public void newGame();
 
 	/**
-	 * Játék állapot frissítése
-	 */
-	public void updateStatus();
-
-	/**
-	 * Következő kör
+	 * Következő kör.
 	 */
 	public void nextTurn();
 
 	/**
-	 * Állapot frissítése játék vége esetén(végeredmény)
+	 * Játék állapot frissítése.
+	 */
+	public void updateStatus();
+
+	/**
+	 * Állapot frissítése játék vége esetén(végeredmény).
 	 */
 	public void updateGameOverStatus();
 }

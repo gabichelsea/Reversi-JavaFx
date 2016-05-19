@@ -1,30 +1,34 @@
 package hu.unideb.inf.reversi.service.model;
 
 /**
- * Cella pozíciót tartalmazó osztály
+ * Cella pozíciót tartalmazó osztály.
  */
 public class CellPosition {
 
 	/**
-	 * Azt adja meg hogy hanyadik sorban lévő cellát szeretnénk
+	 * Sor index.
 	 */
 	private Integer rowIndex;
-	
+
 	/**
-	 * Azt adja meg hogy hanyadik oszlopban lévő cellát szeretnénk
+	 * Oszlop index.
 	 */
 	private Integer columnIndex;
 
 	/**
-	 * Paraméternélküli üres konstruktor a példányosításhoz
+	 * Paraméternélküli üres konstruktor a példányosításhoz.
 	 */
 	public CellPosition() {
 	}
 
 	/**
-	 * Kétparaméteres konstruktor amely a sorok indexét és az oszlopok indexét várja paraméterként
-	 * @param rowIndex A sorok indexének beállításra szolgál
-	 * @param columnIndex Az oszlopok indexének beállítására szolgál
+	 * Kétparaméteres konstruktor amely a sorok indexét és az oszlopok indexét
+	 * várja paraméterként.
+	 * 
+	 * @param rowIndex
+	 *            A sorok indexe.
+	 * @param columnIndex
+	 *            Az oszlopok indexe.
 	 */
 	public CellPosition(Integer rowIndex, Integer columnIndex) {
 		this.rowIndex = rowIndex;
@@ -32,24 +36,28 @@ public class CellPosition {
 	}
 
 	/**
-	 * Visszaadja a sorok indexét
-	 * @return rowindex A sorok indexét adja vissza
+	 * Visszaadja a sorok indexét.
+	 * 
+	 * @return A sorok indexe.
 	 */
 	public Integer getRowIndex() {
 		return rowIndex;
 	}
 
 	/**
-	 * Beállítja a sorok indexét
-	 * @param rowIndex Beállítja a sorok indexét
+	 * Beállítja a sorok indexét.
+	 * 
+	 * @param rowIndex
+	 *            A beállítandó sorok indexe.
 	 */
 	public void setRowIndex(Integer rowIndex) {
 		this.rowIndex = rowIndex;
 	}
 
 	/**
-	 * Visszaadja az oszlopok indexét
-	 * @return columnIndex Az oszlopok indexét adja vissza
+	 * Visszaadja az oszlopok indexét.
+	 * 
+	 * @return Az oszlopok indexe.
 	 */
 	public Integer getColumnIndex() {
 		return columnIndex;
@@ -57,7 +65,9 @@ public class CellPosition {
 
 	/**
 	 * Beállítja az oszlopok indexét
-	 * @param columnIndex Az oszlopok indexének beállítására szolgáló paraméter
+	 * 
+	 * @param columnIndex
+	 *            A beállítandó oszlopok indexe.
 	 */
 	public void setColumnIndex(Integer columnIndex) {
 		this.columnIndex = columnIndex;

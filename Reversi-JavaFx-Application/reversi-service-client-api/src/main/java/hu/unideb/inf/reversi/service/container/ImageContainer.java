@@ -8,26 +8,32 @@ import java.util.Map;
 import javafx.scene.image.Image;
 
 /**
- * Képeket tároló osztály
+ * Képeket tároló osztály, amely ezt kulcs-érték párok formájában valósítja meg.
  * 
  * @param <T>
- *            Amely egy általános típust jelöl
+ *            Azon típus, amely kulcsként szolgál a hozzá rendelt képhez.
  */
 public class ImageContainer<T> {
 
 	/**
-	 * Képeket tároló adatszerkezet
+	 * Képeket tároló adatszerkezet.
 	 */
 	private Map<T, Image> imageMap = new HashMap<T, Image>();
+	
+	/**
+	 * Paraméter nélküli üres konstruktor.
+	 */
+	public ImageContainer() {
+	}
 
 	/**
-	 * Képek hozzáadását végző metódus
+	 * A paraméterként megadott kulccsal és a hozzá tartozó URL által elérhető
+	 * képpel egy új kulcs-érték párat adunk hozzá a képtárolóhoz.
 	 * 
 	 * @param imageKey
-	 *            Képkulcs, amely alapján adjuk hozzá vagy modositsuk a képeket
-	 *            tároló adatszerkezetben a képeket
+	 *            A képhez tartozó kulcsunk.
 	 * @param imageUrl
-	 *            A kép url-jét tároló változó
+	 *            A kép url-je {@link String} típusként ábrázolva.
 	 */
 	public void addImage(T imageKey, String imageUrl) {
 		Image image = getImageByUrl(imageUrl);
@@ -38,9 +44,11 @@ public class ImageContainer<T> {
 	}
 
 	/**
-	 * Visszaadja a képet, képUrl alapján
-	 * @param imageUrl Képurl, amely alapján adjuk vissza a képet
-	 * @return Image Kép, amelyet a képUrl alapján adunk vissza
+	 * Visszaadja a képet, URL alapján.
+	 * 
+	 * @param imageUrl
+	 *            Azon URL, mely alapján visszaadjuk a képet.
+	 * @return Az URL alapján lekért kép.
 	 */
 	private Image getImageByUrl(String imageUrl) {
 		Image image = imageMap.get(imageUrl);
@@ -61,16 +69,20 @@ public class ImageContainer<T> {
 	}
 
 	/**
-	 * Képeket tároló adatszerkezet visszaadása
-	 * @return {@link Map} képeket tároló adatszerkezet visszaadása
+	 * Visszaadjuk a képeket tároló adatszerkezetet.
+	 * 
+	 * @return A képeket tároló adatszerkezet.
 	 */
 	public Map<T, Image> getImageMap() {
 		return imageMap;
 	}
 
 	/**
-	 * {@link IllegalArgumentException} dobása, amennyiben nem található a képünk
-	 * @param imageUrl KépUrl amely alapján nem található a kép
+	 * {@link IllegalArgumentException} dobása, mivel ezen URL által nem érhető
+	 * el kép.
+	 * 
+	 * @param imageUrl
+	 *            A hibás URL
 	 */
 	private void imageException(String imageUrl) {
 		throw new IllegalArgumentException(TextContainer.IMG_NOT_FOUND + imageUrl);

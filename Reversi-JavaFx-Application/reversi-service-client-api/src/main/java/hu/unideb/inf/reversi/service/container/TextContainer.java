@@ -1,7 +1,7 @@
 package hu.unideb.inf.reversi.service.container;
 
 /**
- * Szövegeket szolgáltató osztály
+ * {@link String}-ket tároló osztály.
  */
 public class TextContainer {
 

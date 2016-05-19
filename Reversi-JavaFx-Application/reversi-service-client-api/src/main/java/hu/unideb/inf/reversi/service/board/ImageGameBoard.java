@@ -9,32 +9,32 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * KépesJátékTábla amely tartalmazz egy képtárolót és egy képlistát ami mátrixot
- * szimulál
+ * Játéktábla, amely tartalmaz egy képtárolót illetve egy képeket tartalmazó
+ * listát.
  * 
  * @param <T>
- *            Amely egy általános típust jelöl
+ *            A tábla típusa
  */
 public abstract class ImageGameBoard<T> extends GameBoard<T> {
 
 	/**
-	 * Képlista, ami mátrixnak feletethető meg
+	 * Képeket tartalmazó lista.
 	 */
 	private List<ImageView> imageViewList;
 
 	/**
-	 * Képtároló, amelyből a képlistánkat felépítjük
+	 * Képek tárolására szolgáló osztály.
 	 */
 	private ImageContainer<T> imageContainer = new ImageContainer<T>();
 
 	/**
-	 * Alapértelmezett konstruktor hogy legyen
+	 * Alapértelmezett paraméternélküli konstruktor.
 	 */
 	public ImageGameBoard() {
 	}
 
 	/**
-	 * Beállítja a képListánk méretét a sorok és oszlopok számának szorzatára
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void setDimensions(Integer columns, Integer rows) {
@@ -45,17 +45,26 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	}
 
 	/**
-	 * Lekérünk egy képNézetet és egy képet, majd a képNézetnek beállítjuk a
-	 * képet
+	 * Lekérünk egy képnézetet, majd beállítjuk neki a képkulcs által lekért
+	 * képet.
 	 * 
 	 * @param imageKey
-	 *            Képkulcs, amely alapján lekérjük a képTárolóból az adott képet
+	 *            Ezen képkulcs alapján kérjük le a képet.
 	 * @param cellPosition
-	 *            Cellapozició, amely alapján lekérjük a listánkból az adott
-	 *            pozicioju képnézetet
+	 *            Ezen cellapozíció alapján kérjük le az adott pozíciójú
+	 *            képnézetet.
 	 */
 	public void setImage(T imageKey, CellPosition cellPosition) {
 		getImageView(cellPosition).setImage(getImageByKey(imageKey));
+	}
+
+	/**
+	 * Visszaadja a képtárolót.
+	 * 
+	 * @return A képtároló.
+	 */
+	public ImageContainer<T> getImageContainer() {
+		return imageContainer;
 	}
 
 	/**
@@ -64,8 +73,8 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	 * @param cellPosition
 	 *            Az a cellapozició, amelyik poziciónál lévő képNézetet
 	 *            szeretnénk lekérni
-	 * @return ImageView Képnézet, a cellapozicio alapján visszaadva, ha ez
-	 *         null, akkor egy új példányt adunk vissza
+	 * @return {@link ImageView}, a cellapozicio alapján visszaadva, ha ez null,
+	 *         akkor egy új példányt adunk vissza
 	 */
 	private ImageView getImageView(CellPosition cellPosition) {
 		Integer x = cellPosition.getRowIndex();
@@ -81,23 +90,14 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	}
 
 	/**
-	 * Visszaadja a képtároló objektumból a képkulcs-hoz tartozó objektumot
+	 * Visszaadja a képtároló objektumból a képkulcshoz tartozó képet.
 	 * 
 	 * @param imageKey
-	 *            Képkulcs, amely alapján kérjük le a hozzá tartozó objekumot
-	 * @return Image Visszaadja a képet, amit a képkulcs alapján kérünk le
+	 *            A képkulcs alapján kapunk egy képet a képtárolónkból.
+	 * @return A képkulcshoz tartozó kép.
 	 */
 	private Image getImageByKey(T imageKey) {
 		return imageContainer.getImageMap().get(imageKey);
-	}
-
-	/**
-	 * Visszaadja a képtároló objektumot
-	 * 
-	 * @return imageContainer Visszaadja a képtároló objektumot
-	 */
-	public ImageContainer<T> getImageContainer() {
-		return imageContainer;
 	}
 
 }
