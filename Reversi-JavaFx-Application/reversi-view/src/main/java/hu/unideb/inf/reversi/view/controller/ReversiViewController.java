@@ -58,10 +58,8 @@ public class ReversiViewController {
 
 		setUpResults(firstPlayerResultVo, secondPlayerResultVo);
 
-		playerResultService.removeByPlayerId(firstPlayer.getId());
-		playerResultService.removeByPlayerId(secondPlayer.getId());
-		playerResultService.add(firstPlayerResultVo);
-		playerResultService.add(secondPlayerResultVo);
+		playerResultService.modify(firstPlayerResultVo);
+		playerResultService.modify(secondPlayerResultVo);
 	}
 
 	private void setUpResults(PlayerResultVo firstPlayerResultVo, PlayerResultVo secondPlayerResultVo) {

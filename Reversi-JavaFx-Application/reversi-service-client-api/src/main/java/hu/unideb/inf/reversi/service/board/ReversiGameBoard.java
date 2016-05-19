@@ -27,11 +27,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Megvizsgáljuk hogy a paraméterként szereplő cella érvényes-e
-	 * 
-	 * @param cellPosition
-	 *            Cell pozíció amelyre vizsgáljuk hogy érvényes cella-e
-	 * @return {@link Boolean} Visszaadja hogy érvényes-e a cella
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Boolean isValidCellPosition(CellPosition cellPosition) {
@@ -41,12 +37,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Beállítjuk az értéket, az adott cella pozícióra
-	 * 
-	 * @param cellPosition
-	 *            Cellapozíció, amelyre befogjuk állítani az értéket
-	 * @param value
-	 *            Érték, amelyet beállitunk az adott cella pozícióra
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void setCell(CellPosition cellPosition, CellType value) {
@@ -61,10 +52,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Cella frissítése cella pozíció által
-	 * 
-	 * @param cellPosition
-	 *            Cellapozíció, amely alapján frissítsük a cellát
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateCell(CellPosition cellPosition) {
@@ -72,10 +60,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Cellák kitöltése érték alapján
-	 * 
-	 * @param value
-	 *            Érték, amellyel kitöltjük a cellákat
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void fillCells(CellType value) {
@@ -88,12 +73,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Visszaadja az adott cellát, cella pozíció által
-	 * 
-	 * @param cellPosition
-	 *            Cella pozíció, amely alapján adjuk vissza a cellát
-	 * @return {@link CellType} Cellatípus, amelyet visszaadunk cella pozíció
-	 *         által
+	 * {@inheritDoc}
 	 */
 	@Override
 	public CellType getCellByPosition(CellPosition cellPosition) {
@@ -107,12 +87,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Visszaadja a cella helyzetét 1 dimenziós tömbben nézve
-	 * 
-	 * @param cellPosition
-	 *            Cellapozíció, amelyből egy értéket állítunk elő, ami ugyanazon
-	 *            cella lesz, csak 1 dimenziós eléréssel
-	 * @return Visszadja a cella helyzetét 1 dimenziós tömbben nézve
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Integer getCellPositionNumber(CellPosition cellPosition) {
@@ -120,10 +95,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Összes rács kitöltése
-	 * 
-	 * @param value
-	 *            Érték, amellyel kitöltjük az összes rácsot
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void fillAllGrid(CellType value) {
@@ -131,10 +103,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	}
 
 	/**
-	 * Cella elfogadásáért felelős metódus
-	 * @param cellApplyService Cella alkalmazás szolgáltatás
-	 * @param child Csomópont gyermek
-	 * @return Visszaadjuk az átvett cellát
+	 * {@inheritDoc}
 	 */
 	@Override
 	public <T> T applyCell(CellApplyService<T> cellApplyService, Node child) {

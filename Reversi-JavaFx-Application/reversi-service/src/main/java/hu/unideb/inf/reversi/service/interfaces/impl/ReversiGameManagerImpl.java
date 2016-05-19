@@ -34,7 +34,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Új játék
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void newGame() {
@@ -48,7 +48,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Játék állapot frissítése
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateStatus() {
@@ -63,7 +63,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Állapot frissítése játék vége esetén(végeredmény)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void updateGameOverStatus() {
@@ -83,18 +83,24 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	public ActualPlayer checkAnotherPlayer() {
 		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
 			return ActualPlayer.SECOND_PLAYER;
-		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)){
+		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
 			return ActualPlayer.FIRST_PLAYER;
 		} else {
 			return ActualPlayer.NOBODY;
 		}
 	}
 
-	private String getPlayerName(ActualPlayer player) {
-		return player.equals(ActualPlayer.FIRST_PLAYER) ? firstPlayer.getUserName() : secondPlayer.getUserName();
+	public String getPlayerName(ActualPlayer player) {
+		if (player.equals(ActualPlayer.FIRST_PLAYER)) {
+			return firstPlayer.getUserName();
+		} else if (player.equals(ActualPlayer.SECOND_PLAYER)) {
+			return secondPlayer.getUserName();
+		} else {
+			return null;
+		}
 	}
 
-	private CellType getCellTypeByPlayer(ActualPlayer actualPlayer) {
+	public CellType getCellTypeByPlayer(ActualPlayer actualPlayer) {
 		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
 			return CellType.RED;
 		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
@@ -105,9 +111,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Visszadja az aktuális játékoshoz tartozó korongok számát
-	 * @param actualPlayer Az aktuális játékoshoz megszámoljuk, hogy hány korongja van
-	 * @return {@link Integer} Visszaadja az adott játékoshoz tartozó korongok számát
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Integer countPieces(ActualPlayer actualPlayer) {
@@ -116,9 +120,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Megszámolja, hogy hány olyan cella van, ahova letudja rakni az adott játékos a bábuját
-	 * @param actualPlayer Az aktuális játékos
-	 * @return {@link Integer} Visszaadja az adott játékos számára lerakható cellák számát
+	 * {@inheritDoc}
 	 */
 	@Override
 	public Integer countRemainingValidCells(ActualPlayer actualPlayer) {
@@ -161,8 +163,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Mikor kattintok a felhasználói felületen, ezen metódus fog aktiválódni
-	 * @param mouseEvent Egéresemény
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void mouseClicked(MouseEvent mouseEvent) {
@@ -171,18 +172,18 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 				child);
 	}
 
-	private Boolean mouseClicked(Integer x, Integer y) {
-		if (actualPlayer.equals(ActualPlayer.NOBODY)) {
+	public Boolean mouseClicked(Integer x, Integer y) {
+		CellPosition cellPosition = new CellPosition(x, y);
+		if (!gameBoard.isValidCellPosition(cellPosition) || actualPlayer.equals(ActualPlayer.NOBODY)) {
 			return false;
 		}
-		CellPosition cellPosition = new CellPosition(x, y);
+
 		Integer count = turnPieces(actualPlayer, cellPosition, false);
 		if (count > 0) {
 			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
-
+			
 			TimerUtility.runDelayed(250, () -> {
 				turnPieces(actualPlayer, cellPosition, true);
-
 				nextTurn();
 				updateStatus();
 				updateGameOverStatus();
@@ -206,16 +207,14 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Visszaadja az aktuális játékost
-	 * @return {@link ActualPlayer} Visszaadja az aktuális játékost
+	 * {@inheritDoc}
 	 */
 	public ActualPlayer getActualPlayer() {
 		return actualPlayer;
 	}
 
 	/**
-	 * Visszaadja a játék jelenlegi eredményét
-	 * @return {@link String} A játék jelenlegi eredményét adja vissza {@link String} formában
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String getStatus() {
@@ -223,7 +222,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * Következő kör
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void nextTurn() {
@@ -243,7 +242,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return secondPlayer;
 	}
 
-
 	public ReversiGameBoard getGameBoard() {
 		return gameBoard;
 	}
@@ -251,6 +249,5 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	public void setActualPlayer(ActualPlayer actualPlayer) {
 		this.actualPlayer = actualPlayer;
 	}
-
 
 }
