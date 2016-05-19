@@ -8,8 +8,20 @@ import java.util.TimerTask;
 
 import javafx.application.Platform;
 
+/**
+ * Időzítést segítő segédosztály.
+ */
 public class TimerUtility {
 
+	/**
+	 * Feladatok elvégzését segítő metódus, amely adott késésse toldja meg az
+	 * elvégzést.
+	 * 
+	 * @param delay
+	 *            A késleltés ideje.
+	 * @param tasks
+	 *            A feladatok.
+	 */
 	public static void runDelayed(Integer delay, Runnable... tasks) {
 		runDelayed(new Timer(), delay, new LinkedList<Runnable>(Arrays.asList(tasks)));
 	}

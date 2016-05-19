@@ -5,14 +5,12 @@ import java.util.Comparator;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 
 /**
- * Két JátékosEredményt összehasonlító osztály, pontszámok alapján
+ * Két eredményt rangsorolni képest osztály.
  */
 public class PlayerResultVoComparator implements Comparator<PlayerResultVo> {
 
 	/**
-	 * A két paraméterben szereplő játékos eredmény objektumhoz pontszámot
-	 * számol, majd ha ez egyezik, akkor a korong különbségre bizva a döntést
-	 * határozza meg az összehasonlítás eredményét
+	 * A két paraméterként kapott eredmény rangsorolása pontszám számítása alapján.
 	 */
 	@Override
 	public int compare(PlayerResultVo firstPlayerResultVo, PlayerResultVo secondPlayerResultVo) {

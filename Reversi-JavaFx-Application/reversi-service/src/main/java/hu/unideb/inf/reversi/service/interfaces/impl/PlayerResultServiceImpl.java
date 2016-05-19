@@ -15,7 +15,7 @@ import hu.unideb.inf.reversi.service.mapper.PlayerResultMapper;
 import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 
 /**
- * Adott játékoshoz tartozó eredmények müveleteiért felelős osztály
+ * Adott játékoshoz tartozó eredmények müveleteiért felelős osztály.
  */
 @Service
 @Transactional(propagation = Propagation.REQUIRED)

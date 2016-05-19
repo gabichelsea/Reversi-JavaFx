@@ -12,6 +12,9 @@ import hu.unideb.inf.reversi.service.vo.PlayerVo;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * A játék logikájának vezérlését végző osztály.
+ */
 public class ReversiGameManagerImpl implements ReversiGameManager {
 
 	private ReversiGameBoard gameBoard;
@@ -20,9 +23,22 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	private ActualPlayer actualPlayer = ActualPlayer.FIRST_PLAYER;
 	private String status;
 
+	/**
+	 * Paraméter nélküli üres konstruktor.
+	 */
 	public ReversiGameManagerImpl() {
 	}
 
+	/**
+	 * A függőségek kiemelésért felelős konstruktor.
+	 * 
+	 * @param firstPlayer
+	 *            A beállítandó első játékos.
+	 * @param secondPlayer
+	 *            A beállítandó második játékos.
+	 * @param gameBoard
+	 *            A beállítandó játéktábla.
+	 */
 	public ReversiGameManagerImpl(PlayerVo firstPlayer, PlayerVo secondPlayer, ReversiGameBoard gameBoard) {
 		setUp(firstPlayer, secondPlayer, gameBoard);
 	}
@@ -45,6 +61,19 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		gameBoard.setCell(new CellPosition(5, 5), CellType.RED);
 
 		updateStatus();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void nextTurn() {
+		if (countRemainingValidCells(checkAnotherPlayer()) > 0) {
+			actualPlayer = checkAnotherPlayer();
+		}
+		if (countRemainingValidCells(actualPlayer) == 0) {
+			actualPlayer = ActualPlayer.NOBODY;
+		}
 	}
 
 	/**
@@ -80,36 +109,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		}
 	}
 
-	public ActualPlayer checkAnotherPlayer() {
-		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
-			return ActualPlayer.SECOND_PLAYER;
-		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
-			return ActualPlayer.FIRST_PLAYER;
-		} else {
-			return ActualPlayer.NOBODY;
-		}
-	}
-
-	public String getPlayerName(ActualPlayer player) {
-		if (player.equals(ActualPlayer.FIRST_PLAYER)) {
-			return firstPlayer.getUserName();
-		} else if (player.equals(ActualPlayer.SECOND_PLAYER)) {
-			return secondPlayer.getUserName();
-		} else {
-			return null;
-		}
-	}
-
-	public CellType getCellTypeByPlayer(ActualPlayer actualPlayer) {
-		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
-			return CellType.RED;
-		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
-			return CellType.BLACK;
-		} else {
-			return CellType.EMPTY;
-		}
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -125,6 +124,79 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	@Override
 	public Integer countRemainingValidCells(ActualPlayer actualPlayer) {
 		return countCellsIf((cellPosition) -> turnPieces(actualPlayer, cellPosition, false) > 0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActualPlayer getActualPlayer() {
+		return actualPlayer;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void mouseClicked(MouseEvent mouseEvent) {
+		Node child = mouseEvent.getPickResult().getIntersectedNode();
+		gameBoard.applyCell((cellPosition) -> mouseClicked(cellPosition.getRowIndex(), cellPosition.getColumnIndex()),
+				child);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * Visszaadja az ellenfél játékost ha nincs játék vége.
+	 */
+	public ActualPlayer checkAnotherPlayer() {
+		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
+			return ActualPlayer.SECOND_PLAYER;
+		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
+			return ActualPlayer.FIRST_PLAYER;
+		} else {
+			return ActualPlayer.NOBODY;
+		}
+	}
+
+	/**
+	 * Visszaadja az aktuális játékos nevét.
+	 * 
+	 * @param player
+	 *            Az aktuális játékos.
+	 * @return Az aktuális játékos neve.
+	 */
+	public String getPlayerName(ActualPlayer player) {
+		if (player.equals(ActualPlayer.FIRST_PLAYER)) {
+			return firstPlayer.getUserName();
+		} else if (player.equals(ActualPlayer.SECOND_PLAYER)) {
+			return secondPlayer.getUserName();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Visszaadja a cella típusát az aktuális játékos által.
+	 * 
+	 * @param actualPlayer
+	 *            Az aktuális játékos.
+	 * @return A cella, amely az aktuális játékoshoz tartozik.
+	 */
+	public CellType getCellTypeByPlayer(ActualPlayer actualPlayer) {
+		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
+			return CellType.RED;
+		} else if (actualPlayer.equals(ActualPlayer.SECOND_PLAYER)) {
+			return CellType.BLACK;
+		} else {
+			return CellType.EMPTY;
+		}
 	}
 
 	private Integer turnPieces(ActualPlayer actualPlayer, CellPosition cellPosition, Boolean reallyTurn) {
@@ -162,36 +234,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return 0;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void mouseClicked(MouseEvent mouseEvent) {
-		Node child = mouseEvent.getPickResult().getIntersectedNode();
-		gameBoard.applyCell((cellPosition) -> mouseClicked(cellPosition.getRowIndex(), cellPosition.getColumnIndex()),
-				child);
-	}
-
-	public Boolean mouseClicked(Integer x, Integer y) {
-		CellPosition cellPosition = new CellPosition(x, y);
-		if (!gameBoard.isValidCellPosition(cellPosition) || actualPlayer.equals(ActualPlayer.NOBODY)) {
-			return false;
-		}
-
-		Integer count = turnPieces(actualPlayer, cellPosition, false);
-		if (count > 0) {
-			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
-			
-			TimerUtility.runDelayed(250, () -> {
-				turnPieces(actualPlayer, cellPosition, true);
-				nextTurn();
-				updateStatus();
-				updateGameOverStatus();
-			});
-		}
-		return true;
-	}
-
 	private Integer countCells(CellApplyService<Integer> cellApplyService) {
 		Integer startX = 0, startY = 0, sum = 0;
 		for (int x = startX; x < gameBoard.getColumns(); ++x) {
@@ -207,45 +249,62 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * A kattintás sikeres volt-e játék logika és cella pozíció alapján.
+	 * 
+	 * @param x
+	 *            A cella sora.
+	 * @param y
+	 *            A cella oszlopa.
+	 * @return Érvényes kattintás volt-e.
 	 */
-	public ActualPlayer getActualPlayer() {
-		return actualPlayer;
+	public Boolean mouseClicked(Integer x, Integer y) {
+		CellPosition cellPosition = new CellPosition(x, y);
+		if (!gameBoard.isValidCellPosition(cellPosition) || actualPlayer.equals(ActualPlayer.NOBODY)) {
+			return false;
+		}
+
+		Integer count = turnPieces(actualPlayer, cellPosition, false);
+		if (count > 0) {
+			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
+
+			TimerUtility.runDelayed(250, () -> {
+				turnPieces(actualPlayer, cellPosition, true);
+				nextTurn();
+				updateStatus();
+				updateGameOverStatus();
+			});
+		}
+		return true;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Visszaadja az első játékost.
+	 * @return Az első játékos.
 	 */
-	@Override
-	public String getStatus() {
-		return status;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void nextTurn() {
-		if (countRemainingValidCells(checkAnotherPlayer()) > 0) {
-			actualPlayer = checkAnotherPlayer();
-		}
-		if (countRemainingValidCells(actualPlayer) == 0) {
-			actualPlayer = ActualPlayer.NOBODY;
-		}
-	}
-
 	public PlayerVo getFirstPlayer() {
 		return firstPlayer;
 	}
 
+	/**
+	 * Visszaadja a második játékost.
+	 * @return A második játékos.
+	 */
 	public PlayerVo getSecondPlayer() {
 		return secondPlayer;
 	}
 
+	/**
+	 * Visszaadjuk a játéktáblát.
+	 * @return A játéktábla.
+	 */
 	public ReversiGameBoard getGameBoard() {
 		return gameBoard;
 	}
 
+	/**
+	 * Az aktuális játékos beállítása.
+	 * @param actualPlayer A beállítandó aktuális játékos.
+	 */
 	public void setActualPlayer(ActualPlayer actualPlayer) {
 		this.actualPlayer = actualPlayer;
 	}
