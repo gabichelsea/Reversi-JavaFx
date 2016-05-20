@@ -115,6 +115,8 @@ public class LoginViewController {
 	
 	@FXML
 	protected void backToTheMainPage() {
+		firstPlayer = null;
+		secondPlayer = null;
 		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
 	}
 

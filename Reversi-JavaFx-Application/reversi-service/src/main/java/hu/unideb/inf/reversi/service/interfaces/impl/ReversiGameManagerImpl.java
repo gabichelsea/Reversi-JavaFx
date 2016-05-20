@@ -88,7 +88,9 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		status = firstPlayerName + ": " + firstPlayer.getScore() + "\t" + secondPlayerName + ": "
 				+ secondPlayer.getScore() + "\n";
 
-		status += getPlayerName(actualPlayer) + TextContainer.NEXT + "\n";
+		status += getPlayerName(actualPlayer) + TextContainer.NEXT;
+		
+		updateGameOverStatus();
 	}
 
 	/**
@@ -271,7 +273,6 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 				turnPieces(actualPlayer, cellPosition, true);
 				nextTurn();
 				updateStatus();
-				updateGameOverStatus();
 			});
 		}
 		return true;

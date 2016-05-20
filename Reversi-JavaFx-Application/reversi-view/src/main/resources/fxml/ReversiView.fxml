@@ -22,7 +22,6 @@
 				onAction="#backToTheMainPage"></Button>
 			<Button text="Új játék" onAction="#newGameButtonAction"></Button>
 		</Group>
-
 	</bottom>
 
 

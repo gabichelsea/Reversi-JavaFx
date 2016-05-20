@@ -94,6 +94,8 @@ public class ReversiViewController {
 
 	@FXML
 	protected void backToTheMainPage() {
+		firstPlayer = null;
+		secondPlayer = null;
 		NavigationControllerUtility.loadMainPageView(MainApp.primaryStage);
 	}
 
@@ -129,6 +131,12 @@ public class ReversiViewController {
 
 	private void updateStatus() {
 		gameManager.updateStatus();
-		statusLabel.setText(gameManager.getStatus());
+		statusLabel.setText(gameManager.getStatus() + getPlayerNameAndCellColorpairs());
+	}
+	
+	private String getPlayerNameAndCellColorpairs() {
+		String firstPair = firstPlayer.getUserName() + "(RED)";
+		String secondPair = secondPlayer.getUserName() + "(BLACK)";
+		return "\t\t\t" + firstPair + "---" + secondPair;
 	}
 }
