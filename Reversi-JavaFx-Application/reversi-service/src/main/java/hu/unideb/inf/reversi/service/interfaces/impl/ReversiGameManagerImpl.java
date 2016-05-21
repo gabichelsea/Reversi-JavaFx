@@ -157,6 +157,37 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 				child);
 		logger.info(TextContainer.MOUSE_CLICKED_LOG);
 	}
+	
+	/**
+	 * A kattintás sikeres volt-e játék logika és cella pozíció alapján.
+	 * 
+	 * @param x
+	 *            A cella sora.
+	 * @param y
+	 *            A cella oszlopa.
+	 * @return Érvényes kattintás volt-e.
+	 */
+	public Boolean mouseClicked(Integer x, Integer y) {
+		CellPosition cellPosition = new CellPosition(x, y);
+		if (!gameBoard.isValidCellPosition(cellPosition) || actualPlayer.equals(ActualPlayer.NOBODY)) {
+			logger.info(TextContainer.NON_VALID_MOUSE_CLICKED);
+			return false;
+			
+		}
+
+		Integer count = turnPieces(actualPlayer, cellPosition, false);
+		if (count > 0) {
+			logger.info(TextContainer.VALID_MOUSE_CLICKED);
+			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
+
+			TimerUtility.runDelayed(250, () -> {
+				turnPieces(actualPlayer, cellPosition, true);
+				nextTurn();
+				updateStatus();
+			});
+		}
+		return true;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -168,6 +199,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 
 	/**
 	 * Visszaadja az ellenfél játékost ha nincs játék vége.
+	 * @return Az aktuális játékos.
 	 */
 	public ActualPlayer checkAnotherPlayer() {
 		if (actualPlayer.equals(ActualPlayer.FIRST_PLAYER)) {
@@ -262,36 +294,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		return countCells((cellPosition) -> cellApplyService.applyCell(cellPosition) ? 1 : 0);
 	}
 
-	/**
-	 * A kattintás sikeres volt-e játék logika és cella pozíció alapján.
-	 * 
-	 * @param x
-	 *            A cella sora.
-	 * @param y
-	 *            A cella oszlopa.
-	 * @return Érvényes kattintás volt-e.
-	 */
-	public Boolean mouseClicked(Integer x, Integer y) {
-		CellPosition cellPosition = new CellPosition(x, y);
-		if (!gameBoard.isValidCellPosition(cellPosition) || actualPlayer.equals(ActualPlayer.NOBODY)) {
-			logger.info(TextContainer.NON_VALID_MOUSE_CLICKED);
-			return false;
-			
-		}
-
-		Integer count = turnPieces(actualPlayer, cellPosition, false);
-		if (count > 0) {
-			logger.info(TextContainer.VALID_MOUSE_CLICKED);
-			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
-
-			TimerUtility.runDelayed(250, () -> {
-				turnPieces(actualPlayer, cellPosition, true);
-				nextTurn();
-				updateStatus();
-			});
-		}
-		return true;
-	}
+	
 
 	/**
 	 * Visszaadja az első játékost.

@@ -181,10 +181,10 @@ public class PlayerResultVo implements Serializable {
 	}
 
 	/**
-	 * Beállítja a megszerzett pontokat a paraméterként szereplőre
+	 * Beállítja a megszerzett pontokat a paraméterként szereplőre.
 	 * 
 	 * @param wonPieces
-	 *            A megszerzett pontokat állitja be a paraméterként szereplőre
+	 *            A megszerzett pontokat állitja be a paraméterként szereplőre.
 	 */
 	public void setWonPieces(Integer wonPieces) {
 		this.wonPieces = wonPieces;
