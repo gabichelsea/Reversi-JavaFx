@@ -1,7 +1,5 @@
 package hu.unideb.inf.reversi.service.container;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,40 +31,13 @@ public class ImageContainer<T> {
 	 * @param imageKey
 	 *            A képhez tartozó kulcsunk.
 	 * @param imageUrl
-	 *            A kép url-je {@link String} típusként ábrázolva.
+	 *            A kép elérési útja {@link String} típusként ábrázolva.
 	 */
 	public void addImage(T imageKey, String imageUrl) {
-		Image image = getImageByUrl(imageUrl);
-		if (image == null) {
-			imageException(imageUrl);
-		}
+		Image image = new Image(ClassLoader.getSystemResourceAsStream(imageUrl));
 		imageMap.put(imageKey, image);
 	}
 
-	/**
-	 * Visszaadja a képet, URL alapján.
-	 * 
-	 * @param imageUrl
-	 *            Azon URL, mely alapján visszaadjuk a képet.
-	 * @return Az URL alapján lekért kép.
-	 */
-	private Image getImageByUrl(String imageUrl) {
-		Image image = imageMap.get(imageUrl);
-		if (image == null) {
-			URL url = null;
-
-			try {
-				url = new URL("file:" + imageUrl);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
-
-			if (url != null) {
-				image = new Image(url.toExternalForm());
-			}
-		}
-		return image;
-	}
 
 	/**
 	 * Visszaadjuk a képeket tároló adatszerkezetet.
@@ -75,17 +46,6 @@ public class ImageContainer<T> {
 	 */
 	public Map<T, Image> getImageMap() {
 		return imageMap;
-	}
-
-	/**
-	 * {@link IllegalArgumentException} dobása, mivel ezen URL által nem érhető
-	 * el kép.
-	 * 
-	 * @param imageUrl
-	 *            A hibás URL
-	 */
-	private void imageException(String imageUrl) {
-		throw new IllegalArgumentException(TextContainer.IMG_NOT_FOUND + imageUrl);
 	}
 
 }

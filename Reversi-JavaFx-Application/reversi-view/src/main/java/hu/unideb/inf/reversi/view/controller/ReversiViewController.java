@@ -40,11 +40,9 @@ public class ReversiViewController {
 
 	@FXML
 	protected void initialize() {
-		ClassLoader classLoader = getClass().getClassLoader();
-		gameBoard.getImageContainer().addImage(CellType.RED, classLoader.getResource("img/red.png").getFile());
-		gameBoard.getImageContainer().addImage(CellType.BLACK, classLoader.getResource("img/black.png").getFile());
-		gameBoard.getImageContainer().addImage(CellType.EMPTY, classLoader.getResource("img/empty.png").getFile());
-
+		gameBoard.getImageContainer().addImage(CellType.RED, "img/red.png");
+		gameBoard.getImageContainer().addImage(CellType.BLACK, "img/black.png");
+		gameBoard.getImageContainer().addImage(CellType.EMPTY, "img/empty.png");
 		initPlayers();
 		initReversiGameManager();
 		gameManager.newGame();
