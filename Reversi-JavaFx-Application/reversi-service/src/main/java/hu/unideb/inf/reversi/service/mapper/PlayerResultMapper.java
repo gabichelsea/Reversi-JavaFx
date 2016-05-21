@@ -29,7 +29,7 @@ public class PlayerResultMapper {
 
 	/**
 	 * A paraméterként szereplő VO-ból DTO-t csinál.
-	 * @param playerResultDto Az eredmény DTO-ként.
+	 * @param playerResultVo Az eredmény DTO-ként.
 	 * @return A paraméterként lévő eredmény DTO-ként.
 	 */
 	public static PlayerResult toDto(PlayerResultVo playerResultVo) {

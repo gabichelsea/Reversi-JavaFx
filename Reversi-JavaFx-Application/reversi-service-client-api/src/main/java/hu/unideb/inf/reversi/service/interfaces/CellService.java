@@ -70,14 +70,13 @@ public interface CellService {
 	 */
 	public Integer getCellPositionNumber(CellPosition cellPosition);
 
+
 	/**
 	 * Cella elfogadásáért felelős metódus.
-	 * 
-	 * @param cellApplyService
-	 *            A cella elfogadását definiáló interfész.
-	 * @param child
-	 *            Gyermek csomópont.
-	 * @return Visszaadjuk az elfogadott cellát.
+	 * @param cellApplyService A cella elfogadását definiáló interfész.
+	 * @param child A gyermek csomópont.
+	 * @return T típus, amelyet az interfész definiál.
 	 */
+
 	public <T> T applyCell(CellApplyService<T> cellApplyService, Node child);
 }
