@@ -1,11 +1,11 @@
 package hu.unideb.inf.reversi.service.test.interfaces;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +21,7 @@ import hu.unideb.inf.reversi.service.vo.PlayerVo;
 @Transactional(propagation = Propagation.REQUIRED)
 @Rollback(true)
 public class PlayerServiceTest {
-	private static final Logger logger = LogManager.getLogger(PlayerServiceTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(PlayerServiceTest.class);
 
 	@Autowired
 	private PlayerService playerService;

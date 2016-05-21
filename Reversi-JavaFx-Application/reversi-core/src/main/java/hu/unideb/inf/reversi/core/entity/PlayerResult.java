@@ -17,6 +17,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "player_result")
 public class PlayerResult extends BaseEntity {
+	/**
+	 * Serialazációs szám azonosító.
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**

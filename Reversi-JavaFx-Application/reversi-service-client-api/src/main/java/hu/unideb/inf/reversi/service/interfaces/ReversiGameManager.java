@@ -17,7 +17,7 @@ public interface ReversiGameManager extends BoardGameManager {
 
 	/**
 	 * Megszámolja, hogy hány olyan cella van, ahova letudja rakni az adott játékos a korongját.
-	 * @param actualPlayer Az aktuális játékos
+	 * @param actualPlayer Az aktuális játékos.
 	 * @return Azon cellák száma, ahova letudja rakni a saját korongját.
 	 */
 	public Integer countRemainingValidCells(ActualPlayer actualPlayer);
@@ -35,7 +35,7 @@ public interface ReversiGameManager extends BoardGameManager {
 	public void mouseClicked(MouseEvent mouseEvent);
 	
 	/**
-	 * Visszaadja a játék jelenlegi eredményét
+	 * Visszaadja a játék jelenlegi eredményét.
 	 * @return A játék aktuális állása, eredménye.
 	 */
 	public String getStatus();
