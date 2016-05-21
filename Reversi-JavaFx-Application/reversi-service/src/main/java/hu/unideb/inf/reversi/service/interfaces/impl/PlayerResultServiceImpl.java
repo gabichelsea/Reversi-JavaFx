@@ -2,8 +2,8 @@ package hu.unideb.inf.reversi.service.interfaces.impl;
 
 import java.util.List;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,7 +20,7 @@ import hu.unideb.inf.reversi.service.vo.PlayerResultVo;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerResultServiceImpl implements PlayerResultService {
-	private static final Logger logger = LogManager.getLogger(PlayerResultServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PlayerResultServiceImpl.class);
 
 	@Autowired
 	PlayerResultRepository playerResultRepository;
@@ -68,7 +68,7 @@ public class PlayerResultServiceImpl implements PlayerResultService {
 	@Override
 	public void modify(PlayerResultVo playerResultVo) throws Exception {
 		try {
-			playerResultRepository.save(PlayerResultMapper.toDto(playerResultVo));
+			playerResultRepository.saveAndFlush(PlayerResultMapper.toDto(playerResultVo));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			throw e;

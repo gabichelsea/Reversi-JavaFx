@@ -86,7 +86,7 @@ public class PlayerResultServiceTest {
 		try {
 			playerVo = playerService.getByUserName("userName");
 			PlayerResultVo playerResultVo = playerResultService.getByPlayerId(playerVo.getId());
-			System.out.println(playerResultVo.getPlayer().getUserName());
+
 			Assert.assertEquals(0, playerResultVo.getNumberOfMatches().intValue());
 			Assert.assertEquals(0, playerResultVo.getWin().intValue());
 			Assert.assertEquals(0, playerResultVo.getDraw().intValue());
@@ -105,8 +105,46 @@ public class PlayerResultServiceTest {
 			playerResultService.removeByPlayerId(playerService.getByUserName("userName").getId());
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
+			Assert.fail();
 		}
 	}
 
+	@Test
+	public void modifyTest() {
+		PlayerResultVo playerResultVo;
+		Integer expectedValue = 20;
+		
+		try {
+			playerResultVo = playerResultService.getByPlayerId(playerService.getByUserName("userName").getId());
+			playerResultVo.setNumberOfMatches(expectedValue);
+			playerResultVo.setWin(expectedValue);
+			playerResultVo.setDraw(expectedValue);
+			playerResultVo.setLose(expectedValue);
+			playerResultVo.setWonPieces(expectedValue);
+			playerResultVo.setLostPieces(expectedValue);
+			
+			playerResultService.modify(playerResultVo);
+			playerResultVo = playerResultService.getByPlayerId(playerService.getByUserName("userName").getId());
+			Assert.assertEquals("userName", playerResultVo.getPlayer().getUserName());
+			Assert.assertEquals(expectedValue, playerResultVo.getNumberOfMatches());
+			Assert.assertEquals(expectedValue, playerResultVo.getWin());
+			Assert.assertEquals(expectedValue, playerResultVo.getDraw());
+			Assert.assertEquals(expectedValue, playerResultVo.getLose());
+			Assert.assertEquals(expectedValue, playerResultVo.getWonPieces());
+			Assert.assertEquals(expectedValue, playerResultVo.getLostPieces());
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			Assert.fail();
+		}
+
+	}
+
+	@Test(expected = Exception.class)
+	public void modifyTestWithFail() throws Exception {
+		PlayerResultVo playerResultVo = new PlayerResultVo();
+		playerResultVo.setPlayer(null);
+		playerResultService.modify(playerResultVo);
+	}
 
 }

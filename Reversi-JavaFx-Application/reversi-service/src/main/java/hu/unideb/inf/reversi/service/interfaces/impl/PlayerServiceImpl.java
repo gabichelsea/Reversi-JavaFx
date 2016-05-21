@@ -1,7 +1,8 @@
 package hu.unideb.inf.reversi.service.interfaces.impl;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,7 +19,7 @@ import hu.unideb.inf.reversi.service.vo.PlayerVo;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class PlayerServiceImpl implements PlayerService {
-	private static final Logger logger = LogManager.getLogger(PlayerServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(PlayerServiceImpl.class);
 
 	@Autowired
 	PlayerRepository playerRepository;

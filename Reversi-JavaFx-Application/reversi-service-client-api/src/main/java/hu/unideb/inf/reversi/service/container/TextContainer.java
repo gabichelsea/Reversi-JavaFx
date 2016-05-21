@@ -16,6 +16,20 @@ public class TextContainer {
 	public static final String MUST_PASS = " passzolnia kell";
 
 	public static final String IMG_NOT_FOUND = "A kép nem található";
+	
+	public static final String DEPENDENCIES_INIT_LOG = "Függőségek inicializálása.";
+	public static final String NEW_GAME_LOG = "Új játék.";
+	public static final String NEXT_TURN_LOG = "Következő játékos következik.";
+	public static final String GAME_STATUS_UPDATE_LOG = "Játék állapot frissítése.";
+	public static final String GAME_OVER_STATUS_LOG = "Játék vége.";
+	
+	public static final String MOUSE_CLICKED_LOG = "Egérkattintás!";
+	public static final String COUNT_PIECES_LOG = "Korongok számolása.";
+	public static final String REMAINING_VALID_CELLS_LOG = "Hátralévő érvényes cellák meghatározása.";
+	
+	public static final String NON_VALID_MOUSE_CLICKED = "Érvénytelen egérkattintás.";
+	public static final String VALID_MOUSE_CLICKED = "Érvényes egérkattintás.";
+	
 
 	public static final String MAIN_PAGE_TITLE = "Főoldal";
 	public static final String REGISTER_VIEW_TITLE = "Regisztráció";
@@ -27,4 +41,12 @@ public class TextContainer {
 	public static final String PASSWORDS_ARE_NOT_EQUAL = "A jelszavak nem egyeznek";
 	public static final String REGISTER_CONSTRAINT = "Legalább 3 hosszúságú felhasználónév és 5 hosszúságú jelszó legyen";
 
+	public static final String LOAD_MAIN_PAGE_LOG = "A főoldal betöltődik.";
+	public static final String LOAD_REGISTER_PAGE_LOG = "A regisztrációs oldal betöltődik.";
+	public static final String LOAD_LOGIN_PAGE_LOG = "A bejelentkező oldal betöltődik.";
+	public static final String LOAD_REVERSI_PAGE_LOG = "A játék oldal betöltődik.";
+	public static final String LOAD_RANKING_PAGE_LOG = "A ranglista oldal betöltődik.";
+	
+	public static final String APP_START_LOG = "Az alkalmazás elindul.";
+	public static final String APP_STOP_LOG = "Az alkalmazás leáll.";
 }

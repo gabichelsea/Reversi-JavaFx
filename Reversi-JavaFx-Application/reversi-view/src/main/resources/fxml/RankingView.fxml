@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1287.0" stylesheets="@../css/darkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.reversi.view.controller.RankingViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1287.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.reversi.view.controller.RankingViewController">
 	<children>
 		<TableView fx:id="table" layoutX="56.0" prefHeight="327.0" prefWidth="1176.0">
 			<columns>
@@ -20,6 +20,6 @@
 				<TableColumn fx:id="scoreColumn" minWidth="0.0" prefWidth="65.0" text="Pont" />
 			</columns>
 		</TableView>
-		<Button layoutX="506.0" layoutY="348.0" onAction="#backToTheMainPage" text="Visszalépés a főoldalra" />
+		<Button layoutX="559.0" layoutY="348.0" onAction="#backToTheMainPage" text="Visszalépés a főoldalra" />
 	</children>
 </AnchorPane>

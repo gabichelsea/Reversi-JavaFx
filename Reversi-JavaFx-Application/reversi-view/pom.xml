@@ -30,7 +30,7 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>2.3</version>
 				<executions>
-					<!-- Run shade goal on package phase -->
+
 					<execution>
 						<phase>package</phase>
 						<goals>
@@ -44,7 +44,7 @@
 								reversi-ultimate-${project.version}
 							</finalName>
 							<transformers>
-								<!-- add Main-Class to manifest file -->
+
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>hu.unideb.inf.reversi.view.main.MainApp</mainClass>

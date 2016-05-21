@@ -1,5 +1,8 @@
 package hu.unideb.inf.reversi.service.interfaces.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hu.unideb.inf.reversi.service.board.ReversiGameBoard;
 import hu.unideb.inf.reversi.service.container.TextContainer;
 import hu.unideb.inf.reversi.service.enums.ActualPlayer;
@@ -16,6 +19,7 @@ import javafx.scene.input.MouseEvent;
  * A játék logikájának vezérlését végző osztály.
  */
 public class ReversiGameManagerImpl implements ReversiGameManager {
+	private static final Logger logger = LoggerFactory.getLogger(ReversiGameManagerImpl.class);
 
 	private ReversiGameBoard gameBoard;
 	private PlayerVo firstPlayer;
@@ -40,6 +44,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	 *            A beállítandó játéktábla.
 	 */
 	public ReversiGameManagerImpl(PlayerVo firstPlayer, PlayerVo secondPlayer, ReversiGameBoard gameBoard) {
+		logger.info(TextContainer.DEPENDENCIES_INIT_LOG);
 		setUp(firstPlayer, secondPlayer, gameBoard);
 	}
 
@@ -54,6 +59,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	 */
 	@Override
 	public void newGame() {
+		logger.info(TextContainer.NEW_GAME_LOG);
 		gameBoard.fillAllGrid(CellType.EMPTY);
 		gameBoard.setCell(new CellPosition(4, 4), CellType.RED);
 		gameBoard.setCell(new CellPosition(4, 5), CellType.BLACK);
@@ -70,6 +76,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	public void nextTurn() {
 		if (countRemainingValidCells(checkAnotherPlayer()) > 0) {
 			actualPlayer = checkAnotherPlayer();
+			logger.info(TextContainer.NEXT_TURN_LOG);
 		}
 		if (countRemainingValidCells(actualPlayer) == 0) {
 			actualPlayer = ActualPlayer.NOBODY;
@@ -91,6 +98,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		status += getPlayerName(actualPlayer) + TextContainer.NEXT;
 		
 		updateGameOverStatus();
+		logger.info(TextContainer.GAME_STATUS_UPDATE_LOG);
 	}
 
 	/**
@@ -108,6 +116,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 			}
 			status += "\n" + firstPlayer.getUserName() + ": " + firstPlayer.getScore();
 			status += "\t" + secondPlayer.getUserName() + ": " + secondPlayer.getScore();
+			logger.info(TextContainer.GAME_OVER_STATUS_LOG);
 		}
 	}
 
@@ -116,6 +125,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	 */
 	@Override
 	public Integer countPieces(ActualPlayer actualPlayer) {
+		logger.info(TextContainer.COUNT_PIECES_LOG);
 		CellType cellType = getCellTypeByPlayer(actualPlayer);
 		return countCellsIf((cellPosition) -> cellType.equals(gameBoard.getCellByPosition(cellPosition)));
 	}
@@ -125,6 +135,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	 */
 	@Override
 	public Integer countRemainingValidCells(ActualPlayer actualPlayer) {
+		logger.info(TextContainer.REMAINING_VALID_CELLS_LOG);
 		return countCellsIf((cellPosition) -> turnPieces(actualPlayer, cellPosition, false) > 0);
 	}
 
@@ -144,6 +155,7 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 		Node child = mouseEvent.getPickResult().getIntersectedNode();
 		gameBoard.applyCell((cellPosition) -> mouseClicked(cellPosition.getRowIndex(), cellPosition.getColumnIndex()),
 				child);
+		logger.info(TextContainer.MOUSE_CLICKED_LOG);
 	}
 
 	/**
@@ -262,11 +274,14 @@ public class ReversiGameManagerImpl implements ReversiGameManager {
 	public Boolean mouseClicked(Integer x, Integer y) {
 		CellPosition cellPosition = new CellPosition(x, y);
 		if (!gameBoard.isValidCellPosition(cellPosition) || actualPlayer.equals(ActualPlayer.NOBODY)) {
+			logger.info(TextContainer.NON_VALID_MOUSE_CLICKED);
 			return false;
+			
 		}
 
 		Integer count = turnPieces(actualPlayer, cellPosition, false);
 		if (count > 0) {
+			logger.info(TextContainer.VALID_MOUSE_CLICKED);
 			gameBoard.setCell(cellPosition, getCellTypeByPlayer(actualPlayer));
 
 			TimerUtility.runDelayed(250, () -> {
