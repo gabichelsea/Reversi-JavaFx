@@ -88,7 +88,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 	public CellType getCellByPosition(CellPosition cellPosition) {
 		if (isValidCellPosition(cellPosition)) {
 			Integer position = getCellPositionNumber(cellPosition);
-			if (position >= 0 && position < cellList.size()) {
+			if (position < cellList.size()) {
 				return cellList.get(position);
 			}
 		}
@@ -119,7 +119,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 
 	private <T> Integer findX(CellApplyService<T> cellApplyService, Node child) {
 		Integer x = null;
-		for (Node node = child; node != this; node = node.getParent()) {
+		for (Node node = child; node != null && node != this; node = node.getParent()) {
 			if ((x = GridPane.getColumnIndex(node)) != null) {
 				break;
 			}
@@ -129,7 +129,7 @@ public class ReversiGameBoard extends ImageGameBoard<CellType> implements CellSe
 
 	private <T> Integer findY(CellApplyService<T> cellApplyService, Node child) {
 		Integer y = null;
-		for (Node node = child; node != this; node = node.getParent()) {
+		for (Node node = child; node != null && node != this; node = node.getParent()) {
 			if ((y = GridPane.getRowIndex(node)) != null) {
 				break;
 			}
