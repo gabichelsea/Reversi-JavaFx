@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package hu.unideb.inf.reversi.view.utility;
 
 import org.slf4j.Logger;

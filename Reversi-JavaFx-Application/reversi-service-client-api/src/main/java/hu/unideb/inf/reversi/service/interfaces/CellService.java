@@ -73,10 +73,10 @@ public interface CellService {
 
 	/**
 	 * Cella elfogadásáért felelős metódus.
+	 * @param <T> Az interfész típusos paramétere.
 	 * @param cellApplyService A cella elfogadását definiáló interfész.
 	 * @param child A gyermek csomópont.
-	 * @return T típus, amelyet az interfész definiál.
+	 * @return Az a típus, amelyet az interfész definiál.
 	 */
-
 	public <T> T applyCell(CellApplyService<T> cellApplyService, Node child);
 }

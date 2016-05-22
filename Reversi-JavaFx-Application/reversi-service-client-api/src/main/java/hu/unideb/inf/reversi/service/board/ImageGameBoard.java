@@ -68,8 +68,7 @@ public abstract class ImageGameBoard<T> extends GameBoard<T> {
 	}
 
 	/**
-	 * Visszaadja a képNézetet, a cellapozició alapján
-	 * 
+	 * Visszaadja a képNézetet, a cellapozició alapján.
 	 * @param cellPosition
 	 *            Az a cellapozició, amelyik poziciónál lévő képNézetet
 	 *            szeretnénk lekérni

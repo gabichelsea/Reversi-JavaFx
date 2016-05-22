@@ -14,7 +14,7 @@ import hu.unideb.inf.reversi.service.mapper.PlayerMapper;
 import hu.unideb.inf.reversi.service.vo.PlayerVo;
 
 /**
- * Játékos szolgáltatásokat tartalmazó interfész
+ * Játékos szolgáltatásokat tartalmazó interfész.
  */
 @Service
 @Transactional(propagation = Propagation.REQUIRED)

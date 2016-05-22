@@ -64,7 +64,7 @@ public class CellPosition {
 	}
 
 	/**
-	 * Beállítja az oszlopok indexét
+	 * Beállítja az oszlopok indexét.
 	 * 
 	 * @param columnIndex
 	 *            A beállítandó oszlopok indexe.

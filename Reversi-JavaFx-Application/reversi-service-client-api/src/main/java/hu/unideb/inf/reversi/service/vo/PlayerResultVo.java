@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class PlayerResultVo implements Serializable {
 	/**
-	 * Serialazációs szám azonosító
+	 * Serialazációs szám azonosító.
 	 */
 	private static final long serialVersionUID = 1L;
 
